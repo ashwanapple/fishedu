@@ -58,18 +58,6 @@ http://localhost:5173
 ```
 ---
 
-# Project Structure
-
-```
-src/
-  scenes/        game scenes (home, gameplay, catalogue)
-  objects/       fish, player cursor, etc
-assets/          images and game assets
-index.html       entry point
-```
-
----
-
 # Development Workflow
 
 Pull latest changes:
