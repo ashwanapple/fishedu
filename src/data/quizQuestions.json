@@ -3,14 +3,14 @@
         {
             "id": 1,
             "question": "I love pepperoni",
-            "options": ["really??"],
-            "answer": "really??"
+            "options": ["YES", "NO"],
+            "answer": "YES"
         },
          {
             "id": 2,
-            "question": "I love pepperoni",
+            "question": "I hate pepperoni",
             "options": ["really??"],
-            "answer": "yes"
+            "answer": "really??"
         }
     ], 
     "twilight": [

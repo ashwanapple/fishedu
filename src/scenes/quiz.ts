@@ -6,16 +6,19 @@ interface QuizQuestion {
     question: string
     options: string[]
     answer: string
-}   
+}
 
 export default class Quiz extends Phaser.Scene {
     cursor!: Cursor
     questions: QuizQuestion[] = []
     currentIndex = 0
+    score = 0
+
     questionText!: Phaser.GameObjects.Text
     optionButtons: Phaser.GameObjects.Text[] = []
+    feedbackText!: Phaser.GameObjects.Text
 
-    constructor(){
+    constructor() {
         super("quiz")
     }
 
@@ -25,18 +28,18 @@ export default class Quiz extends Phaser.Scene {
         this.load.json("quizQuestions", "src/data/quizQuestions.json")
     }
 
-    create(data: {level: string}){
+    create(data: { level: string }) {
 
-        this.add.text(300,200,"Fish Quiz")
+        this.add.text(300, 200, "Fish Quiz")
 
-        const backButton = this.add.text(360,400,"Back")
+        const backButton = this.add.text(360, 400, "Back")
             .setInteractive()
 
-        backButton.on("pointerdown",()=>{
+        backButton.on("pointerdown", () => {
             this.scene.start("home")
         })
 
-        this.cursor = new Cursor(this ,300, 400, "cursor")
+        this.cursor = new Cursor(this, 300, 400, "cursor")
 
 
         // Access JSON
@@ -47,7 +50,7 @@ export default class Quiz extends Phaser.Scene {
     }
 
     showQuestion() {
-    if (!this.questions || !this.questions[this.currentIndex]) {
+        if (!this.questions || !this.questions[this.currentIndex]) {
             console.log("No question to display")
             return
         }
@@ -55,36 +58,51 @@ export default class Quiz extends Phaser.Scene {
         this.optionButtons.forEach(btn => btn.destroy())
         this.optionButtons = []
 
-        if(this.questionText) this.questionText.destroy()
-        
+        if (this.questionText) {
+            this.questionText.destroy()
+        }
+        if (this.feedbackText) {
+            this.feedbackText.destroy()
+        }
+
         const q = this.questions[this.currentIndex]!
-        this.questionText = this.add.text(100, 100, q.question)
+        this.questionText = this.add.text(300, 250, q.question)
 
         q.options.forEach((opt, i) => {
-            const btn = this.add.text(120, 150 + i * 50, opt, { fontSize: "20px" })
+            const btn = this.add.text(350, 320 + i * 50, opt, { fontSize: "20px" })
                 .setInteractive()
                 .on("pointerdown", () => this.checkAnswer(opt))
             this.optionButtons.push(btn)
-        })   
+        })
     }
 
     checkAnswer(selected: string) {
         const q = this.questions[this.currentIndex]!
         const correct = q.answer
-        if(!q) return
+        if (!q) return
+
+        // if(this.feedbackText) {
+        //     this.feedbackText.destroy()
+        // }
 
         if (selected == correct) {
-            console.log("correct test")
+            this.score++
+            this.feedbackText = this.add.text(300, 420, "Correct!")
+
         } else {
-            console.log("wrong test")
+            this.feedbackText = this.add.text(300, 420, "Incorrect...")
         }
 
-        this.currentIndex++
-        if (this.currentIndex < this.questions.length) {
-            this.showQuestion()
-        } else {
-            this.add.text(300, 400, "Quiz Complete")
-        }
+        this.time.delayedCall(1000, () => {
+            this.currentIndex++
+            this.feedbackText.destroy()
+            if (this.currentIndex < this.questions.length) {
+                this.showQuestion()
+            } else {
+                this.add.text(300, 450, "Quiz Complete!")
+                this.add.text(300, 475, ` Score: ${this.score}/${this.questions.length}`)
+            }
+        })
     }
 
 }
