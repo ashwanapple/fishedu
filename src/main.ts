@@ -1,6 +1,6 @@
 import Phaser from "phaser"
 
-import HomeScene from "./scenes/homescreen"
+import HomeScene from "./scenes/HomeScreen"
 import GameScene from "./scenes/gamescreen"
 import CatalogueScene from "./scenes/Catalogue"
 
