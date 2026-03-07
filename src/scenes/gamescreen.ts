@@ -1,6 +1,7 @@
 import Phaser from "phaser"
 import Cursor from "../objects/cursor"
 import Fish from "../objects/fish"
+import fishData from "../data/fishData.json"
 
 export default class GameScene extends Phaser.Scene {
 
@@ -12,8 +13,12 @@ export default class GameScene extends Phaser.Scene {
     }
 
     preload() {
-        //this.load.image("fish", "assets/fish/fish.png")
-        this.load.image("fish", "assets/ui/Banana.png")
+        //this.load.image("fish", "assets/fish/single cup.png")
+        // load every png in the JSON
+        fishData.forEach((fish) => {
+            this.load.image(fish.id, fish.image)
+        })
+
         this.load.image("cursor", "assets/ui/Banana.png")
     }
 
@@ -46,7 +51,17 @@ export default class GameScene extends Phaser.Scene {
         const x = -50
         const y = Phaser.Math.Between(50, this.cameras.main.height - 50)
 
-        const fish = new Fish(this, x, y)
+        //only spawn creatures from the abyss zone
+        const zoneCreatures = fishData.filter((fish) => fish.zone === "sunlight")
+
+        // if want all creatures use:
+        // const zoneCreatures = fishData
+
+        if (zoneCreatures.length === 0) return
+
+        const randomFishData = Phaser.Utils.Array.GetRandom(zoneCreatures)
+
+        const fish = new Fish(this, x, y, randomFishData)
 
         fish.on("pointerdown", () => {
             this.catchFish(fish)
@@ -58,9 +73,14 @@ export default class GameScene extends Phaser.Scene {
     catchFish(fish: Fish) {
         if (!fish.active) return
 
+        console.log("Caught:", fish.fishInfo.name)
+        console.log("Type:", fish.fishInfo.species)
+        console.log("Zone:", fish.fishInfo.zone)
+        console.log("Fish caught!")
+
         fish.destroy()
 
-        console.log("Fish caught!")
+       
     }
 
     update(time: number, delta: number) {
