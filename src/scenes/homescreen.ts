@@ -1,6 +1,9 @@
 import Phaser from "phaser"
+import Cursor from "../objects/Cursor"
+
 
 export default class HomeScene extends Phaser.Scene {
+    cursor!: Cursor
 
     constructor() {
         super("home")
@@ -23,6 +26,8 @@ export default class HomeScene extends Phaser.Scene {
         catalogueButton.on("pointerdown", () => {
             this.scene.start("catalogue")
         })
+
+        this.cursor = new Cursor(this ,300, 400)
 
     }
 }

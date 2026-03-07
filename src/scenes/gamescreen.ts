@@ -1,5 +1,5 @@
 import Phaser from "phaser"
-import Cursor from "../objects/cursor"
+import Cursor from "../objects/Cursor"
 
 export default class GameScene extends Phaser.Scene {
 
