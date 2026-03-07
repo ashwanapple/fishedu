@@ -1,56 +1,69 @@
-[
-    {
-        "id" : "single_cup",
-        "name" : "Single cup",
-        "species" : "plastic",
-        "zone" : "sunlight",
-        "image" : "assets/fish/single cup.png",
-        "speedMin": 30,
-        "speedMax": 80,
-        "scale": 0.03
-    },
+{
+    "sunlight": [
+        {
+            "id" : "single_cup",
+            "name" : "Single cup",
+            "species" : "plastic",
+            "zone" : "sunlight",
+            "image" : "assets/fish/single cup.png",
+            "speedMin": 30,
+            "speedMax": 80,
+            "scale": 0.03
+        }
+    ],
 
-    {
-        "id" : "bottle",
-        "name" : "Bootle",
-        "species" : "plastic",
-        "zone" : "twilight",
-        "image" : "assets/fish/bootle.png",
-        "speedMin": 10,
-        "speedMax": 50,
-        "scale": 0.02
-    },
+    "twilight": [
+        {
+            "id" : "bottle",
+            "name" : "Bootle",
+            "species" : "plastic",
+            "zone" : "twilight",
+            "image" : "assets/fish/bootle.png",
+            "speedMin": 10,
+            "speedMax": 50,
+            "scale": 0.02
+        }
+    ],
 
-    {
-        "id" : "cardbored",
-        "name" : "Cardbored",
-        "species" : "paper",
-        "zone" : "midnight",
-        "image" : "assets/fish/bored.png",
-        "speedMin": 30,
-        "speedMax": 70,
-        "scale": 0.06
-    },
+    "midnight": [
+        {
+            "id" : "cardbored",
+            "name" : "Cardbored",
+            "species" : "paper",
+            "zone" : "midnight",
+            "image" : "assets/fish/bored.png",
+            "speedMin": 30,
+            "speedMax": 70,
+            "scale": 0.06
+        }
+    ],
 
-    {
-        "id" : "chipman",
-        "name" : "Chipman",
-        "species" : "tinfoil",
-        "zone" : "abyssal",
-        "image" : "assets/fish/chipman.png",
-        "speedMin": 5,
-        "speedMax": 25,
-        "scale": 0.02
-    },
+    "abyssal": [
+        {
+            "id" : "chipman",
+            "name" : "Chipman",
+            "species" : "tinfoil",
+            "zone" : "abyssal",
+            "image" : "assets/fish/chipman.png",
+            "speedMin": 5,
+            "speedMax": 25,
+            "scale": 0.02
+        }
 
-    {
-        "id" : "cola",
-        "name" : "Cola",
-        "species" : "recycle",
-        "zone" : "trenches",
-        "image" : "assets/fish/cola.png",
-        "speedMin": 30,
-        "speedMax": 50,
-        "scale": 0.03
-    }
-]
+    ],
+
+    "trenches": [
+        {
+            "id" : "cola",
+            "name" : "Cola",
+            "species" : "recycle",
+            "zone" : "trenches",
+            "image" : "assets/fish/cola.png",
+            "speedMin": 30,
+            "speedMax": 50,
+            "scale": 0.03
+        }
+    ]
+
+
+}

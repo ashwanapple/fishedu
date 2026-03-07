@@ -7,16 +7,27 @@ export default class GameScene extends Phaser.Scene {
 
     cursor!: Cursor
     fishes: Fish[] = []
+    currentZone: string = ""
+    
 
     constructor() {
         super("game")
     }
 
+    init(data: { current_zone?: string }) {
+        if (data.current_zone) {
+            this.currentZone = data.current_zone.toLowerCase()
+        }
+    }
+
+
     preload() {
         //this.load.image("fish", "assets/fish/single cup.png")
         // load every png in the JSON
-        fishData.forEach((fish) => {
-            this.load.image(fish.id, fish.image)
+        Object.values(fishData).forEach((zoneArray) => {
+            zoneArray.forEach((fish) => {
+                this.load.image(fish.id, fish.image)
+            })
         })
 
         this.load.image("cursor", "assets/ui/Banana.png")
@@ -51,13 +62,9 @@ export default class GameScene extends Phaser.Scene {
         const x = -50
         const y = Phaser.Math.Between(50, this.cameras.main.height - 50)
 
-        //only spawn creatures from the abyss zone
-        const zoneCreatures = fishData.filter((fish) => fish.zone === "sunlight")
+        const zoneCreatures = fishData[this.currentZone as keyof typeof fishData]
 
-        // if want all creatures use:
-        // const zoneCreatures = fishData
-
-        if (zoneCreatures.length === 0) return
+        if (!zoneCreatures || zoneCreatures.length === 0) return
 
         const randomFishData = Phaser.Utils.Array.GetRandom(zoneCreatures)
 
