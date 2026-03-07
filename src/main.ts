@@ -1,8 +1,8 @@
 import Phaser from "phaser"
 
-import HomeScene from "./scenes/homescreen"
-import GameScene from "./scenes/gamescreen"
-import CatalogueScene from "./scenes/catalogue"
+import HomeScene from "./scenes/HomeScreen"
+import GameScene from "./scenes/GameScreen"
+import CatalogueScene from "./scenes/Catalogue"
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,

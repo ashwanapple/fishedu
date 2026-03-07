@@ -1,8 +1,9 @@
 import Phaser from "phaser"
+import Cursor from "../objects/Cursor"
 
 export default class GameScene extends Phaser.Scene {
 
-    cursor!: Phaser.GameObjects.Sprite
+    cursor!: Cursor
 
     constructor(){
         super("game")
@@ -16,13 +17,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create(){
-
-        this.cursor = this.add.sprite(400,300,"cursor")
-
-        this.input.on("pointermove",(pointer: Phaser.Input.Pointer)=>{
-            this.cursor.x = pointer.x
-            this.cursor.y = pointer.y
-        })
+        this.cursor = new Cursor(this ,300, 400)
 
     }
 
