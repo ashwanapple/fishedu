@@ -2,7 +2,7 @@ import Phaser from "phaser"
 import Cursor from "../objects/cursor"
 
 
-export default class quiz extends Phaser.Scene {
+export default class Quiz extends Phaser.Scene {
     cursor!: Cursor
 
     constructor(){
@@ -30,7 +30,7 @@ export default class quiz extends Phaser.Scene {
 
 
         // Access JSON
-        const allQuiz = this.cache.json.get("quizData")
+        const allQuiz = this.cache.json.get("quizQuestions")
         const questions = allQuiz[data.level]
 
         questions.forEach((q: any, i: number) => {

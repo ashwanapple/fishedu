@@ -33,9 +33,10 @@ export default class HomeScene extends Phaser.Scene {
         })
 
         const quizButton = this.add.text(330, 350, "Quiz")
+            .setInteractive()
 
         quizButton.on("pointerdown", () => {
-            this.scene.start("quiz")
+            this.scene.start("quiz", {level: "surface"})
         })
 
         this.cursor = new Cursor(this ,300, 400, "cursor")

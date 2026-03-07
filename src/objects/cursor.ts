@@ -8,6 +8,8 @@ export default class Cursor extends Phaser.GameObjects.Sprite {
         
         this.setScale(0.05)
 
+        this.setDepth(0)
+
         // add sprite to scene
         scene.add.existing(this)
 
