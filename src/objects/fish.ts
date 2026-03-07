@@ -6,6 +6,8 @@ export default class Fish extends Phaser.GameObjects.Sprite {
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y, "fish")
 
+        this.setScale(0.05)
+
         scene.add.existing(this)
 
         this.speed = Phaser.Math.Between(30, 80)
