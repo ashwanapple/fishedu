@@ -9,6 +9,8 @@ export default class Fish extends Phaser.GameObjects.Sprite {
         scene.add.existing(this)
 
         this.speed = Phaser.Math.Between(30, 80)
+
+        this.setInteractive();
     }
 
     update(delta: number) {
