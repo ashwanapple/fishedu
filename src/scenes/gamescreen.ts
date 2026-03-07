@@ -26,6 +26,13 @@ export default class GameScene extends Phaser.Scene {
             this.scene.start("home")
         })
 
+        const catalogueButton = this.add.text(700,10,"Catalogue")
+            .setInteractive()
+
+        catalogueButton.on("pointerdown", () => {
+            this.scene.start("catalogue")
+        })
+
         this.time.addEvent({
             delay: 2000,
             callback: this.spawnFish,
