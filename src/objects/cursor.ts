@@ -17,6 +17,10 @@ export default class Cursor extends Phaser.GameObjects.Sprite {
             this.x = pointer.x
             this.y = pointer.y
         })
+
+        scene.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+            console.log(pointer)
+        })
     }
 
 }
