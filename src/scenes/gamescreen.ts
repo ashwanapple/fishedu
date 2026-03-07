@@ -13,7 +13,7 @@ export default class GameScene extends Phaser.Scene {
 
     preload() {
         this.load.image("fish", "assets/fish/fish.png")
-        this.load.image("cursor", "assets/ui/cursor.png")
+        this.load.image("cursor", "assets/ui/Banana.png")
     }
 
     create() {

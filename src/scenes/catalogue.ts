@@ -9,6 +9,11 @@ export default class CatalogueScene extends Phaser.Scene {
         super("catalogue")
     }
 
+    preload() {
+        this.load.image("cursor", "assets/ui/Banana.png")
+        this.load.image("fish", "assets/fish/fish.png")
+    }
+
     create(){
 
         this.add.text(300,200,"Fish Catalogue")

@@ -1,10 +1,13 @@
 import Phaser from "phaser"
 
 export default class Cursor extends Phaser.GameObjects.Sprite {
-
-    constructor(scene: Phaser.Scene, x: number, y: number, key: string) {
+    
+    constructor(scene: Phaser.Scene, x: number, y: number, texture: string) {
 
         super(scene, x, y, "cursor")
+
+        
+        this.setScale(0.05)
 
         // add sprite to scene
         scene.add.existing(this)

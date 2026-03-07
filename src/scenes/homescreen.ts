@@ -9,6 +9,11 @@ export default class HomeScene extends Phaser.Scene {
         super("home")
     }
 
+    preload() {
+        this.load.image("cursor", "assets/ui/Banana.png")
+
+    }
+
     create() {
 
         this.add.text(330,150,"Fish Catcher")
