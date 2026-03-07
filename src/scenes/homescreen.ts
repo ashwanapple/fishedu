@@ -32,6 +32,12 @@ export default class HomeScene extends Phaser.Scene {
             this.scene.start("catalogue")
         })
 
+        const quizButton = this.add.text(330, 350, "Quiz")
+
+        quizButton.on("pointerdown", () => {
+            this.scene.start("quiz")
+        })
+
         this.cursor = new Cursor(this ,300, 400, "cursor")
 
     }
