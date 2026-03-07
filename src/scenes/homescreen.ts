@@ -18,42 +18,43 @@ export default class HomeScene extends Phaser.Scene {
 
         this.add.text(330,150,"Ocean Explorer")
 
+        //zone buttons
         const sunlightButton = this.add.text(160,250,"Sunlight")
             .setInteractive()
 
         sunlightButton.on("pointerdown", () => {
-            this.scene.start("game")
+            this.scene.start("game", {current_zone: "sunlight"})
         })
 
         const twilightButton = this.add.text(260,250,"Twilight")
             .setInteractive()
 
         twilightButton.on("pointerdown", () => {
-            this.scene.start("game")
+            this.scene.start("game", {current_zone: "twilight"})
         })
 
         const midnightButton = this.add.text(360,250,"Midnight")
             .setInteractive()
 
         midnightButton.on("pointerdown", () => {
-            this.scene.start("game")
+            this.scene.start("game", {current_zone: "midnight"})
         })
 
         const abyssalButton = this.add.text(460,250,"Abyssal")
             .setInteractive()
 
         abyssalButton.on("pointerdown", () => {
-            this.scene.start("game")
+            this.scene.start("game", {current_zone: "abyssal"})
         })
 
         const trenchesButton = this.add.text(560,250,"Trenches")
             .setInteractive()
 
         trenchesButton.on("pointerdown", () => {
-            this.scene.start("game")
+            this.scene.start("game", {current_zone: "trenches"})
         })
         
-
+        //catelogue button
         const catalogueButton = this.add.text(330,300,"Catalogue")
             .setInteractive()
 
