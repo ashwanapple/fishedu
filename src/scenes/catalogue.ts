@@ -1,5 +1,5 @@
 import Phaser from "phaser"
-import Cursor from "../objects/Cursor"
+import Cursor from "../objects/cursor"
 
 
 export default class CatalogueScene extends Phaser.Scene {
