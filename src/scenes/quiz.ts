@@ -1,9 +1,19 @@
 import Phaser from "phaser"
 import Cursor from "../objects/cursor"
 
+interface QuizQuestion {
+    id: number
+    question: string
+    options: string[]
+    answer: string
+}   
 
 export default class Quiz extends Phaser.Scene {
     cursor!: Cursor
+    questions: QuizQuestion[] = []
+    currentIndex = 0
+    questionText!: Phaser.GameObjects.Text
+    optionButtons: Phaser.GameObjects.Text[] = []
 
     constructor(){
         super("quiz")
@@ -31,15 +41,50 @@ export default class Quiz extends Phaser.Scene {
 
         // Access JSON
         const allQuiz = this.cache.json.get("quizQuestions")
-        const questions = allQuiz[data.level]
+        this.questions = allQuiz[data.level]
 
-        questions.forEach((q: any, i: number) => {
-            this.add.text(100, 100 + i * 60, q.question)
-            q.options.forEach((opt: string, j: number) => {
-                this.add.text(120, 130 + i * 60 + j * 20, `- ${opt}`)
-            })
-        })
+        this.showQuestion();
+    }
 
+    showQuestion() {
+    if (!this.questions || !this.questions[this.currentIndex]) {
+            console.log("No question to display")
+            return
+        }
+
+        this.optionButtons.forEach(btn => btn.destroy())
+        this.optionButtons = []
+
+        if(this.questionText) this.questionText.destroy()
+        
+        const q = this.questions[this.currentIndex]!
+        this.questionText = this.add.text(100, 100, q.question)
+
+        q.options.forEach((opt, i) => {
+            const btn = this.add.text(120, 150 + i * 50, opt, { fontSize: "20px" })
+                .setInteractive()
+                .on("pointerdown", () => this.checkAnswer(opt))
+            this.optionButtons.push(btn)
+        })   
+    }
+
+    checkAnswer(selected: string) {
+        const q = this.questions[this.currentIndex]!
+        const correct = q.answer
+        if(!q) return
+
+        if (selected == correct) {
+            console.log("correct test")
+        } else {
+            console.log("wrong test")
+        }
+
+        this.currentIndex++
+        if (this.currentIndex < this.questions.length) {
+            this.showQuestion()
+        } else {
+            this.add.text(300, 400, "Quiz Complete")
+        }
     }
 
 }
