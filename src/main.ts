@@ -1,7 +1,7 @@
 import Phaser from "phaser"
 
 import HomeScene from "./scenes/HomeScreen"
-import GameScene from "./scenes/GameScreen"
+import GameScene from "./scenes/gamescreen"
 import CatalogueScene from "./scenes/Catalogue"
 
 const config: Phaser.Types.Core.GameConfig = {
