@@ -34,7 +34,7 @@ export default class GameScene extends Phaser.Scene {
         })
 
         this.time.addEvent({
-            delay: 2000,
+            delay: 4000,
             callback: this.spawnFish,
             callbackScope: this,
             loop: true
@@ -46,7 +46,20 @@ export default class GameScene extends Phaser.Scene {
         const y = Phaser.Math.Between(50, this.cameras.main.height - 50)
 
         const fish = new Fish(this, x, y)
+
+        fish.on("pointerdown", () => {
+            this.catchFish(fish)
+        })
+
         this.fishes.push(fish)
+    }
+
+    catchFish(fish: Fish) {
+        if (!fish.active) return
+
+        fish.destroy()
+
+        console.log("Fish caught!")
     }
 
     update(time: number, delta: number) {

@@ -16,7 +16,7 @@ export default class HomeScene extends Phaser.Scene {
 
     create() {
 
-        this.add.text(330,150,"Fish Catcher")
+        this.add.text(330,150,"Ocean Explorer")
 
         const playButton = this.add.text(360,250,"Play")
             .setInteractive()
