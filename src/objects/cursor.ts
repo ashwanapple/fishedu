@@ -5,7 +5,6 @@ export default class Cursor extends Phaser.GameObjects.Sprite {
     constructor(scene: Phaser.Scene, x: number, y: number, texture: string) {
 
         super(scene, x, y, "cursor")
-
         
         this.setScale(0.05)
 
