@@ -2,7 +2,7 @@ import Phaser from "phaser"
 
 export default class Cursor extends Phaser.GameObjects.Sprite {
 
-    constructor(scene: Phaser.Scene, x: number, y: number) {
+    constructor(scene: Phaser.Scene, x: number, y: number, key: string) {
 
         super(scene, x, y, "cursor")
 
@@ -18,8 +18,13 @@ export default class Cursor extends Phaser.GameObjects.Sprite {
             this.y = pointer.y
         })
 
+        // mouse down - catch fish
         scene.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-            console.log(pointer)
+            // catch fish
+        })
+
+        scene.input.on("pointerover", (pointer: Phaser.Input.Pointer) => {
+            // optoin to catch fish? or fish eyeballs you
         })
     }
 

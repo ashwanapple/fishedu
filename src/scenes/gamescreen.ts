@@ -17,7 +17,7 @@ export default class GameScene extends Phaser.Scene {
     }
 
     create(){
-        this.cursor = new Cursor(this ,300, 400)
+        this.cursor = new Cursor(this ,300, 400, "cursor")
 
         const backButton = this.add.text(10,10,"Back")
             .setInteractive()

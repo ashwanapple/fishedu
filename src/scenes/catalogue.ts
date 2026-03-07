@@ -20,7 +20,7 @@ export default class CatalogueScene extends Phaser.Scene {
             this.scene.start("home")
         })
 
-        this.cursor = new Cursor(this ,300, 400)
+        this.cursor = new Cursor(this ,300, 400, "cursor")
 
     }
 
