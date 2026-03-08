@@ -1,5 +1,5 @@
 import Phaser from "phaser"
-
+import Start from "./scenes/startscreen"
 import HomeScene from "./scenes/homescreen"
 import GameScene from "./scenes/gamescreen"
 import Catalogue from "./scenes/catalogue"
@@ -12,7 +12,7 @@ const config: Phaser.Types.Core.GameConfig = {
     height: 720,
     parent: "game-container",
     backgroundColor: "#87CEEB",
-    scene: [HomeScene, GameScene, Catalogue, Quiz, Entry],
+    scene: [Start, HomeScene, GameScene, Catalogue, Quiz, Entry],
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
