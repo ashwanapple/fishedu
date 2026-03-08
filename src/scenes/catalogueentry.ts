@@ -3,9 +3,9 @@ import Cursor from "../objects/cursor"
 import fishData from "../data/fishData.json"
 
 const STYLES = {
-    fishname: { fontFamily: "Caudex", fontSize: "30px", color: "#000000", stroke: "#000000", strokeThickness: 1, align: 'center' },
-    facts: { fontFamily: "Caudex", fontSize: "20px", color: "#000000", stroke: "#000000" },
-    zonefont: { fontFamily: "Caudex", fontSize: "25px", color: "#000000", stroke: "#000000", strokeThickness: 1 },
+    fishname: { fontFamily: "PT Sans Narrow", fontSize: "35px", color: "#000000", stroke: "#000000", strokeThickness: 1, align: 'center' },
+    facts: { fontFamily: "PT Sans Narrow", fontSize: "20px", color: "#000000", stroke: "#000000" },
+    zonefont: { fontFamily: "PT Sans Narrow", fontSize: "25px", color: "#000000", stroke: "#000000", strokeThickness: 1 },
 }
 
 

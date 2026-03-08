@@ -9,12 +9,12 @@ interface QuizQuestion {
 }
 
 const STYLES = {
-    title: { fontFamily: "Caudex", fontSize: "50px", color: "#000000", stroke: "#000000", strokeThickness: 3 },
-    question: { fontFamily: "Caudex", fontSize: "30px", color: "#000000", stroke: "#000000", strokeThickness: 1, align: 'center', wordWrap: {width:800}},
-    button: { fontFamily: "Caudex", fontSize: "18px", color: "#000000", stroke: "#000000" },
-    feedback: { fontFamily: "Caudex", fontSize: "22px", color: "#ffffffff", stroke: "#ffffffff", strokeThickness: 1 },
-    result: { fontFamily: "Caudex", fontSize: "40px", color: "#000000" },
-    unlock: { fontFamily: "Caudex", fontSize: "26px", color: "#c5ECf7" }
+    title: { fontFamily: "PT Sans Narrow", fontSize: "70px", color: "#000000" },
+    question: { fontFamily: "PT Sans Narrow", fontSize: "40px", color: "#000000", align: 'center', wordWrap: {width:800}},
+    button: { fontFamily: "PT Sans Narrow", fontSize: "20px", color: "#000000", stroke: "#000000" },
+    feedback: { fontFamily: "PT Sans Narrow", fontSize: "22px", color: "#ffffffff", stroke: "#ffffffff", strokeThickness: 1 },
+    result: { fontFamily: "PT Sans Narrow", fontSize: "80px", color: "#000000" },
+    unlock: { fontFamily: "PT Sans Narrow", fontSize: "35px", color: "#c5ECf7" }
 }
 
 function textButton(
@@ -93,7 +93,7 @@ export default class Quiz extends Phaser.Scene {
         this.optionContainers = []
         this.currentLevel = data.level
 
-        this.add.text(centerX, 60, `${this.currentLevel.charAt(0).toUpperCase() + this.currentLevel.slice(1)} Quiz`, STYLES.title).setOrigin(0.5)
+        this.add.text(centerX, Y * 1/6, `${this.currentLevel.toUpperCase()} QUIZ`, STYLES.title).setOrigin(0.5)
 
         this.cursor = new Cursor(this, 300, 400, "cursor")
 
@@ -123,7 +123,7 @@ export default class Quiz extends Phaser.Scene {
 
         // Progress indicator
         this.questionText = this.add.text(
-            centerX, Y / 3,
+            centerX, Y * 5.5/15,
             `Q${this.currentIndex + 1}/${questions.length}: \n ${q.question}`,
             STYLES.question
         ).setOrigin(0.5)
