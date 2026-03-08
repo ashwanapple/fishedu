@@ -19,4 +19,19 @@ const config: Phaser.Types.Core.GameConfig = {
     }
 }
 
+declare const WebFont: any
+
+WebFont.load({
+    google: {
+        families: ["PT Sans Narrow"]
+    },
+    active: () => {
+        new Phaser.Game(config)
+    },
+    inactive: () => {
+        // font failed to load, start anyway
+        new Phaser.Game(config)
+    }
+})
+
 new Phaser.Game(config)
