@@ -65,7 +65,7 @@ export default class Quiz extends Phaser.Scene {
 
         this.load.image("cursor", "assets/ui/Banana.png")
         this.load.image("fish", "assets/fish/fish.png")
-        this.load.json("quizQuestions", "src/data/quizQuestions.json")
+        this.load.json("quizQuestions", "data/quizQuestions.json")
         this.load.image("quizbackground", "assets/ui/quizbackground.png")
         this.load.image("score", "assets/ui/score.png")
     }
