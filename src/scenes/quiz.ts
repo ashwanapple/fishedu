@@ -1,6 +1,5 @@
 import Phaser from "phaser"
 import Cursor from "../objects/cursor"
-import type HomeScene from "./homescreen"
 
 interface QuizQuestion {
     id: number
@@ -11,7 +10,7 @@ interface QuizQuestion {
 
 export default class Quiz extends Phaser.Scene {
     cursor!: Cursor
-    questions: QuizQuestion[] = []
+    currentLevel!: string
     currentIndex = 0
     score = 0
 
@@ -30,86 +29,98 @@ export default class Quiz extends Phaser.Scene {
     }
 
     create(data: { level: string }) {
+        this.currentIndex = 0
+        this.score = 0
+        this.optionButtons = []
+        this.currentLevel = data.level
 
         this.add.text(300, 200, "Fish Quiz")
-
-        const backButton = this.add.text(360, 400, "Back")
-            .setInteractive()
-
-        backButton.on("pointerdown", () => {
-            this.scene.start("home")
-        })
-
         this.cursor = new Cursor(this, 300, 400, "cursor")
 
-        // Access JSON
-        const allQuiz = this.cache.json.get("quizQuestions")
-        this.questions = allQuiz[data.level]
+        const allQuiz = this.cache.json.get("quizQuestions") as Record<string, QuizQuestion[]>
+        const questions: QuizQuestion[] = allQuiz[this.currentLevel] ?? []
 
-        this.showQuestion();
-
-
-    }
-
-    showQuestion() {
-        if (!this.questions || !this.questions[this.currentIndex]) {
-            console.log("No question to display")
+        if (questions.length === 0) {
+            this.add.text(300, 250, "No questions found for this level.")
             return
         }
 
+        this.showQuestion(questions)
+    }
+
+    showQuestion(questions: QuizQuestion[]) {
         this.optionButtons.forEach(btn => btn.destroy())
         this.optionButtons = []
 
-        if (this.questionText) {
-            this.questionText.destroy()
-        }
-        if (this.feedbackText) {
-            this.feedbackText.destroy()
+        if (this.questionText) this.questionText.destroy()
+        if (this.feedbackText) this.feedbackText.destroy()
+
+        const q = questions[this.currentIndex]
+
+        if (!q) {
+            console.log("No question at index", this.currentIndex)
+            return
         }
 
-        const q = this.questions[this.currentIndex]!
         this.questionText = this.add.text(300, 250, q.question)
 
         q.options.forEach((opt, i) => {
             const btn = this.add.text(350, 320 + i * 50, opt, { fontSize: "20px" })
                 .setInteractive()
-                .on("pointerdown", () => this.checkAnswer(opt))
+                .on("pointerdown", () => this.checkAnswer(opt, questions))
             this.optionButtons.push(btn)
         })
     }
 
-    checkAnswer(selected: string) {
-        const q = this.questions[this.currentIndex]!
-        const correct = q.answer
+    checkAnswer(selected: string, questions: QuizQuestion[]) {
+        // Disable all buttons to prevent double clicking
+        this.optionButtons.forEach(btn => btn.disableInteractive())
+
+        const q = questions[this.currentIndex]
         if (!q) return
 
-        if (selected == correct) {
-            this.score++
-            this.feedbackText = this.add.text(300, 420, "Correct!")
+        const correct = q.answer
 
+        if (selected === correct) {
+            this.score++
+            this.feedbackText = this.add.text(300, 420, "Correct!", { color: "#00ff00" })
         } else {
-            this.feedbackText = this.add.text(300, 420, "Incorrect...")
+            this.feedbackText = this.add.text(300, 420, `Incorrect! Answer: ${correct}`, { color: "#ff0000" })
         }
 
         this.time.delayedCall(1000, () => {
             this.currentIndex++
-            this.feedbackText.destroy()
-            if (this.currentIndex < this.questions.length) {
-                this.showQuestion()
-            } else {
-                this.add.text(300, 450, "Quiz Complete!")
-                this.add.text(300, 475, ` Score: ${this.score}/${this.questions.length}`)
+            if (this.feedbackText) this.feedbackText.destroy()
 
-                const levels = ["sunlight", "twilight", "midnight", "abyssal", "trenches"]
-                const data = this.scene.settings.data as {level:string}
-                const currentLevelIndex = levels.indexOf(data.level)
-                const nextLevel = levels[currentLevelIndex + 1 ]
-                if(nextLevel) {
-                    const home = this.scene.get("home") as HomeScene
-                    home.unlockedLevels[nextLevel] = true
-                }
+            if (this.currentIndex < questions.length) {
+                this.showQuestion(questions)
+            } else {
+                this.showResults(questions)
             }
         })
     }
 
+    showResults(questions: QuizQuestion[]) {
+        this.optionButtons.forEach(btn => btn.destroy())
+        this.optionButtons = []
+        if (this.questionText) this.questionText.destroy()
+
+        this.add.text(300, 350, "Quiz Complete!", { fontSize: "24px" })
+        this.add.text(300, 380, `Score: ${this.score}/${questions.length}`, { fontSize: "20px" })
+
+        const levels = ["sunlight", "twilight", "midnight", "abyssal", "trenches"]
+        const currentLevelIndex = levels.indexOf(this.currentLevel)
+        const nextLevel = levels[currentLevelIndex + 1]
+
+        if (nextLevel && this.score >= questions.length) {
+            this.registry.set(`unlocked_${nextLevel}`, true)
+            this.add.text(300, 410, `${nextLevel} quiz unlocked!`, { fontSize: "16px", color: "#ffff00" })
+        }
+
+        this.add.text(300, 450, "Back to Home", { fontSize: "20px", color: "#ffffff" })
+            .setInteractive({ useHandCursor: true })
+            .on("pointerdown", () => {
+                this.scene.start("home")
+            })
+    }
 }

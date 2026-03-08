@@ -2,13 +2,6 @@ import Phaser from "phaser"
 import Cursor from "../objects/cursor"
 
 export default class HomeScene extends Phaser.Scene {
-    unlockedLevels: Record<string, boolean> = {
-            sunlight: true,
-            twilight: false,
-            midnight: false,
-            abyssal: false,
-            trenches: false
-        }
     cursor!: Cursor
 
     constructor() {
@@ -17,81 +10,61 @@ export default class HomeScene extends Phaser.Scene {
 
     preload() {
         this.load.image("cursor", "assets/ui/Banana.png")
-
     }
 
     create() {
+        // Read unlocked levels from registry (persists across scene restarts)
+        const unlockedLevels: Record<string, boolean> = {
+            sunlight: true,
+            twilight: this.registry.get("unlocked_twilight") ?? false,
+            midnight: this.registry.get("unlocked_midnight") ?? false,
+            abyssal: this.registry.get("unlocked_abyssal") ?? false,
+            trenches: this.registry.get("unlocked_trenches") ?? false,
+        }
 
         this.add.text(330, 150, "Ocean Explorer")
 
-        //zone buttons
-        const sunlightButton = this.add.text(160, 250, "Sunlight")
-            .setInteractive()
+        // Zone buttons
+        const zones = ["sunlight", "twilight", "midnight", "abyssal", "trenches"]
+        const zoneXPositions = [160, 260, 360, 460, 560]
 
-        sunlightButton.on("pointerdown", () => {
-            this.scene.start("game", { current_zone: "sunlight" })
+        zones.forEach((zone, i) => {
+            this.add.text(zoneXPositions[i]!, 250, zone.charAt(0).toUpperCase() + zone.slice(1))
+                .setInteractive()
+                .on("pointerdown", () => {
+                    this.scene.start("game", { current_zone: zone })
+                })
         })
 
-        const twilightButton = this.add.text(260, 250, "Twilight")
+        // Catalogue button
+        this.add.text(330, 300, "Catalogue")
             .setInteractive()
+            .on("pointerdown", () => {
+                this.scene.start("catalogue")
+            })
 
-        twilightButton.on("pointerdown", () => {
-            this.scene.start("game", { current_zone: "twilight" })
-        })
-
-        const midnightButton = this.add.text(360, 250, "Midnight")
-            .setInteractive()
-
-        midnightButton.on("pointerdown", () => {
-            this.scene.start("game", { current_zone: "midnight" })
-        })
-
-        const abyssalButton = this.add.text(460, 250, "Abyssal")
-            .setInteractive()
-
-        abyssalButton.on("pointerdown", () => {
-            this.scene.start("game", { current_zone: "abyssal" })
-        })
-
-        const trenchesButton = this.add.text(560, 250, "Trenches")
-            .setInteractive()
-
-        trenchesButton.on("pointerdown", () => {
-            this.scene.start("game", { current_zone: "trenches" })
-        })
-
-        //catelogue button
-        const catalogueButton = this.add.text(330, 300, "Catalogue")
-            .setInteractive()
-
-        catalogueButton.on("pointerdown", () => {
-            this.scene.start("catalogue", {previousScene: "home"})
-        })
-
-
-        // CURSOR
+        // Cursor
         this.cursor = new Cursor(this, 300, 475, "cursor")
 
-        // QUIZ BUTTONS
-        const addQuizButton = (x: number, y: number, label: string, level: string) => {
-            const isUnlocked = this.unlockedLevels[level] ?? false
-            const btn = this.add.text(x, y, label, { fontSize: "20px", color: isUnlocked ? "#FFFFFF" : "#888888" })
-                .setInteractive({ useHandCursor: isUnlocked })
+        // Quiz buttons
+        const quizLevels = [
+            { label: "Sunlight Quiz", level: "sunlight", y: 350 },
+            { label: "Twilight Quiz", level: "twilight", y: 375 },
+            { label: "Midnight Quiz", level: "midnight", y: 400 },
+            { label: "Abyssal Quiz", level: "abyssal", y: 425 },
+            { label: "Trenches Quiz", level: "trenches", y: 450 },
+        ]
+
+        quizLevels.forEach(({ label, level, y }) => {
+            const isUnlocked = unlockedLevels[level] ?? false
+            const btn = this.add.text(330, y, label, {
+                fontSize: "20px",
+                color: isUnlocked ? "#ffffff" : "#888888"
+            }).setInteractive({ useHandCursor: isUnlocked })
 
             btn.on("pointerdown", () => {
                 if (isUnlocked) this.scene.start("quiz", { level })
             })
-
-            return btn
-        }
-
-        addQuizButton(330, 350, "Sunlight Quiz", "sunlight")
-        addQuizButton(330, 375, "Twilight Quiz", "twilight")
-        addQuizButton(330, 400, "Midnight Quiz", "midnight")
-        addQuizButton(330, 425, "Abyssal Quiz", "abyssal")
-        addQuizButton(330, 450, "Trenches Quiz", "trenches")
-
+        })
     }
-
-
 }
