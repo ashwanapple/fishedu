@@ -14,19 +14,6 @@
         },
 
         {
-            "id" : "dolphin",
-            "name" : "Dolphin",
-            "speciesFact1" : "Mammal",
-            "zone" : "sunlight",
-            "fact2": "Part of the cetaceans family",
-            "fact3": "Related to orcas",
-            "image" : "assets/fish/dolphin.png",
-            "speedMin": 30,
-            "speedMax": 80,
-            "scale": 0.1
-        },
-
-        {
             "id" : "clownfish",
             "name" : "Clownfish",
             "speciesFact1" : "fish",
@@ -51,20 +38,6 @@
             "speedMax": 80,
             "scale": 0.1
         },
-
-        {
-            "id" : "turtle",
-            "name" : "Sea Turtle",
-            "speciesFact1" : "turtle",
-            "zone" : "sunlight",
-            "fact2": "Eat seaweed and jellyfish",
-            "fact3": "Can live for 100 years",
-            "image" : "assets/fish/turtle.png",
-            "speedMin": 30,
-            "speedMax": 80,
-            "scale": 0.1
-        },
-
         {
             "id" : "starfish",
             "name" : "Starfish",
@@ -75,6 +48,31 @@
             "image" : "assets/fish/starfish.png",
             "speedMin": 5,
             "speedMax": 10,
+            "scale": 0.1
+        },
+
+        {
+            "id" : "dolphin",
+            "name" : "Dolphin",
+            "speciesFact1" : "Mammal",
+            "zone" : "sunlight",
+            "fact2": "Part of the cetaceans family",
+            "fact3": "Related to orcas",
+            "image" : "assets/fish/dolphin.png",
+            "speedMin": 30,
+            "speedMax": 80,
+            "scale": 0.1
+        },
+        {
+            "id" : "turtle",
+            "name" : "Sea Turtle",
+            "speciesFact1" : "turtle",
+            "zone" : "sunlight",
+            "fact2": "Eat seaweed and jellyfish",
+            "fact3": "Can live for 100 years",
+            "image" : "assets/fish/turtle.png",
+            "speedMin": 30,
+            "speedMax": 80,
             "scale": 0.1
         },
 

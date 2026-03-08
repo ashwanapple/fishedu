@@ -62,17 +62,17 @@ export default class Catalogue extends Phaser.Scene {
         const zoneBoxes = {
             //x = 200 y= 295 -> x = 560 y = 155
             sunlight: { x: 190, y: 155, width: 500, height: 210 },
-            twilight: { x: 200, y: 395, width: 350, height: 50 },
-            midnight: { x: 730, y: 125, width: 320, height: 75 },
-            abyssal: { x: 730, y: 310, width: 320, height: 75 },
-            trenches: { x: 725, y: 500, width: 280, height: 75 }
+            twilight: { x: 200, y: 410, width: 350, height: 50 },
+            midnight: { x: 735, y: 135, width: 320, height: 75 },
+            abyssal: { x: 735, y: 330, width: 320, height: 75 },
+            trenches: { x: 735, y: 500, width: 280, height: 75 }
         }
 
         Object.entries(fishData).forEach(([zoneName, zoneFish]) => {
             const box = zoneBoxes[zoneName as keyof typeof zoneBoxes]
             if (!box) return
 
-            const cols = 3
+            const cols = 4
             const rows = Math.ceil(zoneFish.length / cols)
             const cellW = box.width / cols
             const cellH = box.height / rows
@@ -81,8 +81,8 @@ export default class Catalogue extends Phaser.Scene {
                 const col = fishIndex % cols
                 const row = Math.floor(fishIndex / cols)
 
-                const x = box.x + cellW / 2 + col * cellW
-                const y = box.y + cellH / 2 + row * cellH
+                const x = box.x + cellW * 2/3 + col * 115
+                const y = box.y + cellH / 2 + row * 100
 
                 const isUnlocked = savedFish.some((saved) => saved.id === fish.id)
 
@@ -94,7 +94,7 @@ export default class Catalogue extends Phaser.Scene {
                 const scaleY = maxH / fishImage.height
                 const fitScale = Math.min(scaleX, scaleY)
 
-                fishImage.setScale(0.04)
+                fishImage.setScale(0.05)
 
                 if (isUnlocked) {
                     fishImage.setInteractive()
@@ -106,6 +106,9 @@ export default class Catalogue extends Phaser.Scene {
                             current_zone: this.currentZone
                         })
                     })
+                    fishImage.on("pointerover", () => fishImage.setScale(0.06))
+                    fishImage.on("pointerout", () => fishImage.setScale(0.05))
+
                 } else {
                     fishImage.setTint(0x000000)
                     fishImage.setAlpha(0.95)
