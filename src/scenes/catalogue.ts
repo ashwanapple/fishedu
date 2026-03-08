@@ -31,6 +31,8 @@ export default class Catalogue extends Phaser.Scene {
                 this.load.image(fish.id, fish.image)
             })
         })
+
+        this.load.image("mysteryfish", "assets/fish/mysteryfish.png")
     }
 
     create(){
@@ -110,8 +112,8 @@ export default class Catalogue extends Phaser.Scene {
                     fishImage.on("pointerout", () => fishImage.setScale(0.05))
 
                 } else {
-                    fishImage.setTint(0x000000)
-                    fishImage.setAlpha(0.95)
+                    fishImage.setAlpha(0)
+                    this.add.image(x + 25, y, "mysteryfish").setScale(0.5)
                 }
             })
         })
