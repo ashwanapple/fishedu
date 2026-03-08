@@ -1,5 +1,6 @@
 import Phaser from "phaser"
 import Cursor from "../objects/cursor"
+import type HomeScene from "./homescreen"
 
 interface QuizQuestion {
     id: number
@@ -41,12 +42,13 @@ export default class Quiz extends Phaser.Scene {
 
         this.cursor = new Cursor(this, 300, 400, "cursor")
 
-
         // Access JSON
         const allQuiz = this.cache.json.get("quizQuestions")
         this.questions = allQuiz[data.level]
 
         this.showQuestion();
+
+
     }
 
     showQuestion() {
@@ -97,6 +99,15 @@ export default class Quiz extends Phaser.Scene {
             } else {
                 this.add.text(300, 450, "Quiz Complete!")
                 this.add.text(300, 475, ` Score: ${this.score}/${this.questions.length}`)
+
+                const levels = ["sunlight", "twilight", "midnight", "abyssal", "trenches"]
+                const data = this.scene.settings.data as {level:string}
+                const currentLevelIndex = levels.indexOf(data.level)
+                const nextLevel = levels[currentLevelIndex + 1 ]
+                if(nextLevel) {
+                    const home = this.scene.get("home") as HomeScene
+                    home.unlockedLevels[nextLevel] = true
+                }
             }
         })
     }
