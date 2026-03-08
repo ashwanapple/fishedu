@@ -21,7 +21,7 @@ export default class HomeScene extends Phaser.Scene {
         this.load.image("sunlightzone", "assets/ui/sunlightzone.png")
         this.load.image("twilightzone", "assets/ui/twilightzone.png")
         this.load.image("midnightzone", "assets/ui/midnightzone.png")
-        this.load.image("abysszone", "assets/ui/abysszone.png")
+        this.load.image("abyssalzone", "assets/ui/abysszone.png")
         this.load.image("trencheszone", "assets/ui/trencheszone.png")
     }
 
@@ -57,7 +57,7 @@ export default class HomeScene extends Phaser.Scene {
             { level: "sunlight", x: X * 4.45 / 24, y: Y * 5.5 / 15 },
             { level: "twilight", x: X * 4.45 / 24, y: Y * 7.5 / 15 },
             { level: "midnight", x: X * 4.45 / 24, y: Y * 9.5 / 15 },
-            { level: "abyss", x: X * 4.45 / 24, y: Y * 11.5 / 15 },
+            { level: "abyssal", x: X * 4.45 / 24, y: Y * 11.5 / 15 },
             { level: "trenches", x: X * 4.45 / 24, y: Y * 13.5 / 15 },
         ]
 

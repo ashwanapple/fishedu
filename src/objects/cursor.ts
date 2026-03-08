@@ -6,7 +6,7 @@ export default class Cursor extends Phaser.GameObjects.Sprite {
 
         super(scene, x, y, "cursor")
         
-        this.setScale(0.035)
+        this.setScale(0.07)
 
         this.setDepth(30)
 
@@ -25,9 +25,9 @@ export default class Cursor extends Phaser.GameObjects.Sprite {
         // mouse down - catch fish
         scene.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
             // adds little click
-            this.setScale(0.04)
+            this.setScale(0.075)
             scene.time.delayedCall(100, () => {
-                this.setScale(0.035)
+                this.setScale(0.07)
             })
         })
 

@@ -10,7 +10,7 @@ interface QuizQuestion {
 
 const STYLES = {
     title: { fontFamily: "Caudex", fontSize: "50px", color: "#000000", stroke: "#000000", strokeThickness: 3 },
-    question: { fontFamily: "Caudex", fontSize: "30px", color: "#000000", stroke: "#000000", strokeThickness: 1, align: 'center' },
+    question: { fontFamily: "Caudex", fontSize: "30px", color: "#000000", stroke: "#000000", strokeThickness: 1, align: 'center', wordWrap: {width:800}},
     button: { fontFamily: "Caudex", fontSize: "18px", color: "#000000", stroke: "#000000" },
     feedback: { fontFamily: "Caudex", fontSize: "22px", color: "#ffffffff", stroke: "#ffffffff", strokeThickness: 1 },
     result: { fontFamily: "Caudex", fontSize: "40px", color: "#000000" },
@@ -101,7 +101,7 @@ export default class Quiz extends Phaser.Scene {
         const questions: QuizQuestion[] = allQuiz[this.currentLevel] ?? []
 
         if (questions.length === 0) {
-            this.add.text(centerX, 250, "No questions found for this level.", STYLES.question).setOrigin(0.5)
+            this.add.text(centerX, Y * 3/5, "No questions found for this level.", STYLES.question).setOrigin(0.5)
             return
         }
 
@@ -182,6 +182,9 @@ export default class Quiz extends Phaser.Scene {
 
         if (nextLevel && this.score >= questions.length) {
             this.registry.set(`unlocked_${nextLevel}`, true)
+            this.registry.set(`completed_${this.currentLevel}`, true)
+            this.add.text(centerX, Y * 13/15, `${nextLevel} zone unlocked!`, STYLES.unlock).setOrigin(0.5)
+        } else if (this.score >= questions.length) {
             this.registry.set(`completed_${this.currentLevel}`, true)
         }
 

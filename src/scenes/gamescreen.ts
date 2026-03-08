@@ -103,10 +103,10 @@ export default class GameScene extends Phaser.Scene {
 const particles = this.add.particles(0, 0, "bubble", {
     speed: { min: 10, max: 50 },
     angle: { min: 240, max: 300 },      // wider spread
-    scale: { min: 0.01, max: 0.05 },
+    scale: { min: 0.01, max: 0.025 },
     alpha: { start: 0.8, end: 0 },
     lifespan: { min: 800, max: 2000 },  // more varied lifespans
-    frequency: 50,
+    frequency: 150,
     gravityY: -50,
     accelerationX: { min: -20, max: 20 }, // random left/right drift
     rotate: { min: 0, max: 360 },         // spin slightly
@@ -115,7 +115,7 @@ const particles = this.add.particles(0, 0, "bubble", {
 
 // follow the cursor every frame
 this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
-    particles.setPosition(pointer.x + 35, pointer.y)
+    particles.setPosition(pointer.x, pointer.y)
 })
     }
 
