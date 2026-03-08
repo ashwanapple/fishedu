@@ -67,17 +67,10 @@ export default class CatalogueEntry extends Phaser.Scene {
         }
 
         this.add.text(410, 150, fish.name,STYLES.fishname).setOrigin(0.5, 0)
-
         this.add.image(435, 340, fish.id).setScale(0.05)
-
         this.add.text(300, 210, `${fish.zone}`, STYLES.zonefont)
-
         this.add.text(780, 200, `This is a ${fish.speciesFact1}`, STYLES.facts)
-
         this.add.text(780, 360, fish.fact2 ?? "No description available.", STYLES.facts)
-
-        this.add.text(780, 520, fish.fact3 ?? "No description available.", STYLES.facts)
-
-        
+        this.add.text(780, 520, fish.fact3 ?? "No description available.", STYLES.facts)      
     }
 }

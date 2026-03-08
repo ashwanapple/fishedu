@@ -58,9 +58,9 @@ export default class Catalogue extends Phaser.Scene {
             //x = 200 y= 295 -> x = 560 y = 155
             sunlight: { x: 210, y: 155, width: 350, height: 110 },
             twilight: { x: 200, y: 395, width: 350, height: 50 },
-            midnight: { x: 70, y: 260, width: 280, height: 110 },
-            abyssal: { x: 430, y: 260, width: 280, height: 110 },
-            trenches: { x: 250, y: 400, width: 280, height: 110 }
+            midnight: { x: 730, y: 115, width: 320, height: 75 },
+            abyssal: { x: 730, y: 305, width: 320, height: 75 },
+            trenches: { x: 725, y: 500, width: 280, height: 75 }
         }
 
         Object.entries(fishData).forEach(([zoneName, zoneFish]) => {
