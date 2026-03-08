@@ -7,7 +7,7 @@ import Quiz from "./scenes/quiz"
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
-    width: 1280,
+    width: 1400,
     height: 720,
     parent: "game-container",
     backgroundColor: "#87CEEB",
