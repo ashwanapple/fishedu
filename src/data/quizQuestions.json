@@ -2,47 +2,185 @@
     "sunlight": [
         {
             "id": 1,
-            "question": "I love pepperoni",
-            "options": ["YES", "NO"],
-            "answer": "YES"
+            "question": "What do sea turtles in the Sunlight Zone often eat?",
+            "options": ["Rocks", "Seaweed and jellyfish", "Sand only", "Metal scraps"],
+            "answer": "Seaweed and jellyfish"
         },
-         {
+        {
             "id": 2,
-            "question": "I hate pepperoni",
-            "options": ["really??"],
-            "answer": "really??"
+            "question": "Which animal might you see in the Sunlight Zone?",
+            "options": ["Dolphin", "Lanternfish", "Anglerfish", "Vampire squid"],
+            "answer": "Dolphin"
+        },
+        {
+            "id": 3,
+            "question": "What is one reason sharks visit the Sunlight Zone?",
+            "options": ["To fly in the sky", "To hunt for food", "To build nests in trees", "To stay away from fish"],
+            "answer": "To hunt for food"
+        },
+        {
+            "id": 4,
+            "question": "Which animal in the Sunlight Zone is a mammal?",
+            "options": ["Tuna", "Dolphin", "Seahorse", "Starfish"],
+            "answer": "Dolphin"
+        },
+        {
+            "id": 5,
+            "question": "Why is plankton important in the Sunlight Zone?",
+            "options": ["It blocks all sunlight", "It helps start many ocean food chains", "It turns into rocks", "It scares away whales"],
+            "answer": "It helps start many ocean food chains"
         }
-    ], 
+    ],
     "twilight": [
         {
             "id": 1,
-            "question": "I love pepperoni",
-            "options": ["really??"],
-            "answer": "yes"
+            "question": "Which creature is often found in the Twilight Zone?",
+            "options": ["Swordfish", "Lanternfish", "Sea turtle", "Clownfish"],
+            "answer": "Lanternfish"
+        },
+        {
+            "id": 2,
+            "question": "Why do lanternfish have that name?",
+            "options": ["They carry tiny lanterns", "They can make light", "They are shaped like lamps", "They live in lighthouses"],
+            "answer": "They can make light"
+        },
+        {
+            "id": 3,
+            "question": "Which animal from the Twilight Zone may move upward at night to feed?",
+            "options": ["Lanternfish", "Coral polyp", "Sea star", "Sponge crab"],
+            "answer": "Lanternfish"
+        },
+        {
+            "id": 4,
+            "question": "Why do many Twilight Zone animals have large eyes?",
+            "options": ["To see better in dim light", "To hold extra water", "To sleep longer", "To scare plants"],
+            "answer": "To see better in dim light"
+        },
+        {
+            "id": 5,
+            "question": "Which creature may use glowing body parts in the Twilight Zone?",
+            "options": ["Jellyfish", "Lanternfish", "Both jellyfish and lanternfish", "Neither"],
+            "answer": "Both jellyfish and lanternfish"
+        },
+        {
+            "id": 6,
+            "question": "Why do some Twilight Zone animals glow?",
+            "options": ["To communicate or hide", "To boil water", "To make the ocean salty", "To grow leaves"],
+            "answer": "To communicate or hide"
         }
-    ], 
+    ],
     "midnight": [
         {
             "id": 1,
-            "question": "I love pepperoni",
-            "options": ["really??"],
-            "answer": "yes"
+            "question": "Which famous fish lives in the Midnight Zone?",
+            "options": ["Anglerfish", "Goldfish", "Salmon", "Seahorse"],
+            "answer": "Anglerfish"
+        },
+        {
+            "id": 2,
+            "question": "What does an anglerfish use its glowing lure for?",
+            "options": ["To dry off", "To attract prey", "To dig tunnels", "To clean rocks"],
+            "answer": "To attract prey"
+        },
+        {
+            "id": 3,
+            "question": "Which animal might live in the Midnight Zone?",
+            "options": ["Vampire squid", "Parrotfish", "Sea otter", "Clownfish"],
+            "answer": "Vampire squid"
+        },
+        {
+            "id": 4,
+            "question": "Why do many Midnight Zone animals have soft bodies?",
+            "options": ["It helps them handle deep pressure", "It helps them fly", "It keeps them dry", "It helps them live on land"],
+            "answer": "It helps them handle deep pressure"
+        },
+        {
+            "id": 5,
+            "question": "What special thing can some Midnight Zone animals do?",
+            "options": ["Change into birds", "Make their own light", "Breathe fire", "Freeze the ocean"],
+            "answer": "Make their own light"
+        },
+        {
+            "id": 6,
+            "question": "Which creature in this zone may have a huge mouth and sharp teeth?",
+            "options": ["Deep-sea dragonfish", "Dolphin", "Crab on the beach", "Sea turtle"],
+            "answer": "Deep-sea dragonfish"
+        },
+        {
+            "id": 7,
+            "question": "Why are many Midnight Zone animals dark-colored?",
+            "options": ["To blend into the darkness", "To reflect sunlight", "To look like coral reefs", "To stay warm from the sun"],
+            "answer": "To blend into the darkness"
         }
     ],
     "abyssal": [
         {
             "id": 1,
-            "question": "I love pepperoni",
-            "options": ["really??"],
-            "answer": "yes"
+            "question": "Which animal may live in the Abyssal Zone?",
+            "options": ["Dumbo octopus", "Sea gull", "Seal", "Clownfish"],
+            "answer": "Dumbo octopus"
+        },
+        {
+            "id": 2,
+            "question": "Why is the Dumbo octopus called that?",
+            "options": ["It has big ear-like fins", "It is gray like an elephant", "It lives on land", "It makes trumpet sounds"],
+            "answer": "It has big ear-like fins"
+        },
+        {
+            "id": 3,
+            "question": "Which creature might crawl on the seafloor in the Abyssal Zone?",
+            "options": ["Sea cucumber", "Penguin", "Trout", "Frog"],
+            "answer": "Sea cucumber"
+        },
+        {
+            "id": 4,
+            "question": "What do some abyssal animals eat?",
+            "options": ["Falling bits of dead plants and animals", "Apples from trees", "Only ice cubes", "Nothing at all"],
+            "answer": "Falling bits of dead plants and animals"
+        },
+        {
+            "id": 5,
+            "question": "Which animal in the Abyssal Zone can clean up the seafloor by eating tiny bits of food?",
+            "options": ["Sea cucumber", "Dolphin", "Lobster from a tidepool", "Sea turtle"],
+            "answer": "Sea cucumber"
+        },
+        {
+            "id": 6,
+            "question": "Which creature may live close to the abyssal seafloor?",
+            "options": ["Brittle star", "Butterfly", "Robin", "Jellybean worm"],
+            "answer": "Brittle star"
         }
     ],
     "trenches": [
         {
             "id": 1,
-            "question": "I love pepperoni",
-            "options": ["really??"],
-            "answer": "yes"
+            "question": "Which animal has been found in ocean trenches?",
+            "options": ["Snailfish", "Seahorse", "Clownfish", "Sea otter"],
+            "answer": "Snailfish"
+        },
+        {
+            "id": 2,
+            "question": "Which creature may live in or near trenches?",
+            "options": ["Amphipod", "Dolphin", "Penguin", "Tuna"],
+            "answer": "Amphipod"
+        },
+        {
+            "id": 3,
+            "question": "Which animal is a tiny shrimp-like creature found in trenches?",
+            "options": ["Amphipod", "Shark", "Whale", "Seahorse"],
+            "answer": "Amphipod"
+        },
+        {
+            "id": 4,
+            "question": "What do trench animals need to survive?",
+            "options": ["Bright sunshine", "Special bodies that handle pressure", "Wings", "Dry land"],
+            "answer": "Special bodies that handle pressure"
+        },
+        {
+            "id": 5,
+            "question": "Which statement about trench animals is true?",
+            "options": ["They all live near the ocean surface", "Many are small and built for extreme pressure", "They need lots of sunlight", "They are the same as pond animals"],
+            "answer": "Many are small and built for extreme pressure"
         }
     ]
 }
