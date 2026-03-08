@@ -84,7 +84,7 @@ export default class HomeScene extends Phaser.Scene {
             .setDepth(5)
 
         catalogueButton.on("pointerdown", () => {
-            this.scene.start("catalogue")
+            this.scene.start("catalogue", {previousScene: "home"})
         })
 
         catalogueButton.on("pointerover", () => catalogueButton.setScale(0.57))
