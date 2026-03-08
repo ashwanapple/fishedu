@@ -61,7 +61,7 @@ export default class Catalogue extends Phaser.Scene {
 
         const zoneBoxes = {
             //x = 200 y= 295 -> x = 560 y = 155
-            sunlight: { x: 210, y: 155, width: 350, height: 110 },
+            sunlight: { x: 250, y: 205, width: 350, height: 110 },
             twilight: { x: 200, y: 395, width: 350, height: 50 },
             midnight: { x: 730, y: 125, width: 320, height: 75 },
             abyssal: { x: 730, y: 310, width: 320, height: 75 },
@@ -94,7 +94,7 @@ export default class Catalogue extends Phaser.Scene {
                 const scaleY = maxH / fishImage.height
                 const fitScale = Math.min(scaleX, scaleY)
 
-                fishImage.setScale(0.035)
+                fishImage.setScale(0.04)
 
                 if (isUnlocked) {
                     fishImage.setInteractive()

@@ -1,13 +1,91 @@
 {
     "sunlight": [
         {
-            "id" : "single_cup",
-            "name" : "Single cup",
-            "speciesFact1" : "plastic",
+            "id" : "seaweed",
+            "name" : "Seaweed",
+            "speciesFact1" : "plant",
             "zone" : "sunlight",
-            "fact2": "this is a cup!",
-            "fact3": "fact3",
-            "image" : "assets/fish/single cup.png",
+            "fact2": "Gets eaten by turtles.",
+            "fact3": "Can reach 55 meters in length!",
+            "image" : "assets/fish/seaweed.png",
+            "speedMin": 10,
+            "speedMax": 30,
+            "scale": 0.03
+        },
+
+        {
+            "id" : "dolphin",
+            "name" : "Dolphin",
+            "speciesFact1" : "Mammal",
+            "zone" : "sunlight",
+            "fact2": "Part of the cetaceans family",
+            "fact3": "Related to orcas",
+            "image" : "assets/fish/dolphin.png",
+            "speedMin": 30,
+            "speedMax": 80,
+            "scale": 0.03
+        },
+
+        {
+            "id" : "clownfish",
+            "name" : "Clownfish",
+            "speciesFact1" : "fish",
+            "zone" : "sunlight",
+            "fact2": "Live in coral reefs",
+            "fact3": "NEMO",
+            "image" : "assets/fish/clownfish.png",
+            "speedMin": 10,
+            "speedMax": 40,
+            "scale": 0.03
+        },
+
+        {
+            "id" : "coral",
+            "name" : "Coral",
+            "speciesFact1" : "plant",
+            "zone" : "sunlight",
+            "fact2": "Come in lots of colors!",
+            "fact3": "Flourish in tropical climates",
+            "image" : "assets/fish/coral.png",
+            "speedMin": 30,
+            "speedMax": 80,
+            "scale": 0.03
+        },
+
+        {
+            "id" : "turtle",
+            "name" : "Sea Turtle",
+            "speciesFact1" : "turtle",
+            "zone" : "sunlight",
+            "fact2": "Eat seaweed and jellyfish",
+            "fact3": "Can live for 100 years",
+            "image" : "assets/fish/turtle.png",
+            "speedMin": 30,
+            "speedMax": 80,
+            "scale": 0.03
+        },
+
+        {
+            "id" : "starfish",
+            "name" : "Starfish",
+            "speciesFact1" : "echinoderms",
+            "zone" : "sunlight",
+            "fact2": "They can regenrate!",
+            "fact3": "404 no brain found",
+            "image" : "assets/fish/starfish.png",
+            "speedMin": 5,
+            "speedMax": 10,
+            "scale": 0.03
+        },
+
+        {
+            "id" : "shark",
+            "name" : "Great White Shark",
+            "speciesFact1" : "Shark",
+            "zone" : "sunlight",
+            "fact2": "Can live for 30 years",
+            "fact3": "Weigh over 5000 lbs",
+            "image" : "assets/fish/shark.png",
             "speedMin": 30,
             "speedMax": 80,
             "scale": 0.03
