@@ -1,12 +1,14 @@
 import Phaser from "phaser"
 import Cursor from "../objects/cursor"
 import fishData from "../data/fishData.json"
+import { getCatalogue } from "../objects/entries"
 
 
 export default class CatalogueScene extends Phaser.Scene {
     cursor!: Cursor
     previousScene: string = "home"
     currentZone?: string
+    
 
     constructor(){
         super("catalogue")
@@ -32,9 +34,11 @@ export default class CatalogueScene extends Phaser.Scene {
 
     create(){
 
-        this.add.text(300,200,"Fish Catalogue")
+        this.add.text(300,50,"Fish Catalogue")
 
-        const backButton = this.add.text(360,400,"Back")
+        const savedFish = getCatalogue()
+
+        const backButton = this.add.text(360,500,"Back")
             .setInteractive()
 
         backButton.on("pointerdown", () => {
@@ -45,6 +49,28 @@ export default class CatalogueScene extends Phaser.Scene {
             } else {
                 this.scene.start("home")
             }
+        })
+
+        savedFish.forEach((fish, index) => {
+            const y = 100 + index * 100
+
+            this.add.image(80, y, fish.id).setScale(0.04)
+
+            this.add.text(140, y - 20, fish.name, {
+                fontSize: "20px",
+                color: "#ffffff"
+            })
+
+            this.add.text(140, y + 10, `Species: ${fish.species} | Zone: ${fish.zone}`, {
+                fontSize: "16px",
+                color: "#cccccc"
+            })
+
+            this.add.text(140, y + 30, fish.description, {
+                fontSize: "16px",
+                color: "#cccccc"
+            })
+
         })
 
         this.cursor = new Cursor(this ,300, 400, "cursor")

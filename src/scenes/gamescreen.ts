@@ -2,6 +2,7 @@ import Phaser from "phaser"
 import Cursor from "../objects/cursor"
 import Fish from "../objects/fish"
 import fishData from "../data/fishData.json"
+import { addFishToCatalogue } from "../objects/entries"
 
 export default class GameScene extends Phaser.Scene {
 
@@ -19,7 +20,6 @@ export default class GameScene extends Phaser.Scene {
             this.currentZone = data.current_zone.toLowerCase()
         }
     }
-
 
     preload() {
         Object.values(fishData).forEach((zoneArray) => {
@@ -78,12 +78,23 @@ export default class GameScene extends Phaser.Scene {
     catchFish(fish: Fish) {
         if (!fish.active) return
 
-        console.log("Caught:", fish.fishInfo.name)
-        console.log("Type:", fish.fishInfo.species)
-        console.log("Zone:", fish.fishInfo.zone)
-        console.log("Fish caught!")
+        const wasAdded = addFishToCatalogue({
+        id: fish.fishInfo.id,
+        name: fish.fishInfo.name,
+        species: fish.fishInfo.species,
+        zone: fish.fishInfo.zone,
+        description: fish.fishInfo.description,
+        image: fish.fishInfo.image
+        })
 
-        fish.destroy()
+        if (wasAdded) {
+            this.showNotification(`${fish.fishInfo.name} added to catalogue!`)
+            fish.destroy()
+        } else {
+            this.showNotification(`${fish.fishInfo.name} found already`)
+        }
+
+        
 
        
     }
@@ -95,4 +106,30 @@ export default class GameScene extends Phaser.Scene {
             fish.update(delta)
         })
     }
+
+    showNotification(message: string) {
+    const text = this.add.text(
+        this.cameras.main.width / 2,
+        50,
+        message,
+        {
+            fontSize: "24px",
+            color: "#ffffff",
+            backgroundColor: "#000000",
+            padding: { x: 12, y: 8 }
+        }
+    )
+
+    text.setOrigin(0.5)
+
+    this.tweens.add({
+        targets: text,
+        alpha: 0,
+        duration: 1200,
+        ease: "Linear",
+        onComplete: () => {
+            text.destroy()
+        }
+    })
+}
 }
