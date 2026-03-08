@@ -24,7 +24,7 @@ export default class Catalogue extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("background", "assets/ui/diaryMain.png")
+        this.load.image("diarybackground", "assets/ui/diaryMain.png")
         this.load.image("back", "assets/ui/backbutton.png")
         Object.values(fishData).forEach((zoneArray) => {
             zoneArray.forEach((fish) => {
@@ -36,7 +36,7 @@ export default class Catalogue extends Phaser.Scene {
     }
 
     create(){
-        this.add.image(0,0, "background").setOrigin(0, 0).setDisplaySize(this.scale.width, this.scale.height).setDepth(0)
+        this.add.image(0,0, "diarybackground").setOrigin(0, 0).setDisplaySize(this.scale.width, this.scale.height).setDepth(0)
     
         const savedFish = getCatalogue()
         const allFish = Object.values(fishData).flat()

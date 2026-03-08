@@ -66,7 +66,7 @@ export default class Quiz extends Phaser.Scene {
         this.load.image("cursor", "assets/ui/Banana.png")
         this.load.image("fish", "assets/fish/fish.png")
         this.load.json("quizQuestions", "src/data/quizQuestions.json")
-        this.load.image("background", "assets/ui/quizbackground.png")
+        this.load.image("quizbackground", "assets/ui/quizbackground.png")
         this.load.image("score", "assets/ui/score.png")
     }
 
@@ -86,7 +86,7 @@ export default class Quiz extends Phaser.Scene {
         const Y = this.scale.height
         const centerX = this.scale.width / 2
 
-        this.add.image(0, 0, "background").setOrigin(0, 0).setDisplaySize(this.scale.width, Y)
+        this.add.image(0, 0, "quizbackground").setOrigin(0, 0).setDisplaySize(this.scale.width, Y)
 
         this.currentIndex = 0
         this.score = 0
