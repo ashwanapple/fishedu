@@ -5,6 +5,7 @@ export type FishInfo = {
     name: string
     species: string
     zone: string
+    description: string
     image: string
     speedMin: number
     speedMax: number
