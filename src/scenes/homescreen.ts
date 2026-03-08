@@ -65,7 +65,7 @@ export default class HomeScene extends Phaser.Scene {
             .setInteractive()
 
         catalogueButton.on("pointerdown", () => {
-            this.scene.start("catalogue")
+            this.scene.start("catalogue", {previousScene: "home"})
         })
 
 

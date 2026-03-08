@@ -22,8 +22,6 @@ export default class GameScene extends Phaser.Scene {
 
 
     preload() {
-        //this.load.image("fish", "assets/fish/single cup.png")
-        // load every png in the JSON
         Object.values(fishData).forEach((zoneArray) => {
             zoneArray.forEach((fish) => {
                 this.load.image(fish.id, fish.image)
@@ -47,11 +45,11 @@ export default class GameScene extends Phaser.Scene {
             .setInteractive()
 
         catalogueButton.on("pointerdown", () => {
-            this.scene.start("catalogue")
+            this.scene.start("catalogue", {previousScene: "game", currentZone: this.currentZone})
         })
 
         this.time.addEvent({
-            delay: 4000,
+            delay: 3000,
             callback: this.spawnFish,
             callbackScope: this,
             loop: true
