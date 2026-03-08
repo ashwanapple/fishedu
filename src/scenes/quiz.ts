@@ -12,7 +12,7 @@ const STYLES = {
     title: { fontFamily: "PT Sans Narrow", fontSize: "70px", color: "#000000" },
     question: { fontFamily: "PT Sans Narrow", fontSize: "40px", color: "#000000", align: 'center', wordWrap: {width:800}},
     button: { fontFamily: "PT Sans Narrow", fontSize: "20px", color: "#000000", stroke: "#000000" },
-    feedback: { fontFamily: "PT Sans Narrow", fontSize: "22px", color: "#ffffffff", stroke: "#ffffffff", strokeThickness: 1 },
+    feedback: { fontFamily: "PT Sans Narrow", fontSize: "25px", color: "#ffffffff" },
     result: { fontFamily: "PT Sans Narrow", fontSize: "80px", color: "#000000" },
     unlock: { fontFamily: "PT Sans Narrow", fontSize: "35px", color: "#c5ECf7" }
 }
