@@ -13,8 +13,8 @@ const STYLES = {
     question: { fontFamily: "Caudex", fontSize: "30px", color: "#000000", stroke: "#000000", strokeThickness: 1, align: 'center'},
     button: { fontFamily: "Caudex", fontSize: "18px", color: "#000000", stroke: "#000000" },
     feedback: { fontFamily: "Caudex", fontSize: "22px", color: "#ffffffff", stroke: "#ffffffff", strokeThickness: 1 },
-    result: { fontFamily: "Caudex", fontSize: "26px", color: "#000000", stroke: "#000000", strokeThickness: 4 },
-    unlock: { fontFamily: "Caudex", fontSize: "16px", color: "#ffff00", strokeThickness: 3 },
+    result: { fontFamily: "Caudex", fontSize: "40px", color: "#000000" },
+    unlock: { fontFamily: "Caudex", fontSize: "26px", color: "#c5ECf7"}
 }
 
 function textButton(
@@ -24,9 +24,10 @@ function textButton(
     text: string,
     bgColor: number = 0xc5ECf7,
     hoverColor: number = 0x2589c7,
+    labelStyle = STYLES.button,
     padding = { x: 200, y: 12 }
 ) {
-    const label = scene.add.text(0, 0, text, STYLES.button).setOrigin(0.5)
+    const label = scene.add.text(0, 0, text, labelStyle).setOrigin(0.5)
     const width = label.width + padding.x * 2
     const height = label.height + padding.y * 2
 
@@ -64,6 +65,7 @@ export default class Quiz extends Phaser.Scene {
         this.load.image("fish", "assets/fish/fish.png")
         this.load.json("quizQuestions", "src/data/quizQuestions.json")
         this.load.image("background", "assets/ui/quizbackground.png")
+        this.load.image("score", "assets/ui/score.png")
     }
 
     create(data: { level: string }) {
@@ -149,25 +151,27 @@ export default class Quiz extends Phaser.Scene {
     }
 
     showResults(questions: QuizQuestion[]) {
+        const centerX = this.scale.width / 2
+        const Y = this.scale.height
+
+        this.add.image(0, 0, "score").setOrigin(0, 0).setDisplaySize(this.scale.width, Y)
         this.optionContainers.forEach(c => c.destroy())
         this.optionContainers = []
         if (this.questionText) this.questionText.destroy()
         if (this.feedbackText) this.feedbackText.destroy()
 
-        const centerX = this.scale.width / 2
-
-        this.add.text(centerX, 200, "Quiz Complete!", STYLES.result).setOrigin(0.5)
-        this.add.text(centerX, 260, `Score: ${this.score} / ${questions.length}`, STYLES.result).setOrigin(0.5)
+        this.add.text(centerX, Y / 6, "Quiz Complete!", STYLES.result).setOrigin(0.5)
+        this.add.text(centerX, Y* 1/2, `${this.score} / ${questions.length}`, STYLES.result).setOrigin(0.5)
 
         const levels = ["sunlight", "twilight", "midnight", "abyssal", "trenches"]
         const nextLevel = levels[levels.indexOf(this.currentLevel) + 1]
 
         if (nextLevel && this.score >= questions.length) {
             this.registry.set(`unlocked_${nextLevel}`, true)
-            this.add.text(centerX, 320, `🔓 ${nextLevel.charAt(0).toUpperCase() + nextLevel.slice(1)} unlocked!`, STYLES.unlock).setOrigin(0.5)
+            this.add.text(centerX, Y* 7/8, `${nextLevel.charAt(0).toUpperCase() + nextLevel.slice(1)} unlocked!`, STYLES.unlock).setOrigin(0.5)
         }
 
-        const { container } = textButton(this, centerX, 400, "Back to Home", 0x1a6fa8, 0x2589c7)
+        const { container } = textButton(this, centerX, Y * 3/4, "Back to Home", 0x1a6fa8, 0x2589c7, {...STYLES.button, color: "#ffffff"})
         container.on("pointerdown", () => this.scene.start("home"))
     }
 }
