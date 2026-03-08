@@ -39,6 +39,7 @@ export default class GameScene extends Phaser.Scene {
         this.load.image("trenchessub", "assets/ui/trenchessub.png")
 
         this.load.image("cursor", "assets/ui/Banana.png")
+        this.load.image("bubble", "assets/ui/bubble.png")
         this.load.image("diary", "assets/ui/diarybook.png")
         this.load.image("back", "assets/ui/backbutton.png")
 
@@ -95,6 +96,27 @@ export default class GameScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         })
+
+        // preload a small circle or star image first
+// this.load.image("particle", "assets/ui/particle.png")
+
+const particles = this.add.particles(0, 0, "bubble", {
+    speed: { min: 10, max: 50 },
+    angle: { min: 240, max: 300 },      // wider spread
+    scale: { min: 0.01, max: 0.05 },
+    alpha: { start: 0.8, end: 0 },
+    lifespan: { min: 800, max: 2000 },  // more varied lifespans
+    frequency: 50,
+    gravityY: -50,
+    accelerationX: { min: -20, max: 20 }, // random left/right drift
+    rotate: { min: 0, max: 360 },         // spin slightly
+    bounce: 0.2,                          // subtle wobble
+})
+
+// follow the cursor every frame
+this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
+    particles.setPosition(pointer.x + 35, pointer.y)
+})
     }
 
     spawnFish() {

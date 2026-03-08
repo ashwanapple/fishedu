@@ -12,6 +12,7 @@ export default class HomeScene extends Phaser.Scene {
         this.load.image("cursor", "assets/ui/Banana.png")
         this.load.image("home", "assets/ui/home.png")
         this.load.image("diary", "assets/ui/diarybook.png")
+        this.load.image("homebanner", "assets/ui/homebanner.png")
 
         this.load.image("quizComplete", "assets/ui/quizComplete.png")
         this.load.image("quizUnlocked", "assets/ui/quizUnlocked.png")
@@ -25,9 +26,22 @@ export default class HomeScene extends Phaser.Scene {
     }
 
     create() {
+
         const X = this.scale.width
         const Y = this.scale.height
         this.add.image(0, 0, "home").setOrigin(0, 0).setDisplaySize(X, Y)
+
+        const backToStartButton = this.add.image(X * 3.75 / 24, 60, "homebanner")
+            .setScale(0.25)
+            .setInteractive()
+            .setDepth(5)
+
+        backToStartButton.on("pointerdown", () => {
+            this.scene.start("start")
+        })
+
+        backToStartButton.on("pointerover", () => backToStartButton.setScale(0.28))
+        backToStartButton.on("pointerout", () => backToStartButton.setScale(0.25))
 
         // Read unlocked levels from registry (persists across scene restarts)
         const unlockedLevels: Record<string, boolean> = {

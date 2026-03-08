@@ -34,6 +34,8 @@ export default class Cursor extends Phaser.GameObjects.Sprite {
         scene.input.on("pointerover", (pointer: Phaser.Input.Pointer) => {
             // optoin to catch fish? or fish eyeballs you
         })
+
+        
     }
 
 }
