@@ -10,11 +10,11 @@ interface QuizQuestion {
 
 const STYLES = {
     title: { fontFamily: "Caudex", fontSize: "50px", color: "#000000", stroke: "#000000", strokeThickness: 3 },
-    question: { fontFamily: "Caudex", fontSize: "30px", color: "#000000", stroke: "#000000", strokeThickness: 1, align: 'center'},
+    question: { fontFamily: "Caudex", fontSize: "30px", color: "#000000", stroke: "#000000", strokeThickness: 1, align: 'center' },
     button: { fontFamily: "Caudex", fontSize: "18px", color: "#000000", stroke: "#000000" },
     feedback: { fontFamily: "Caudex", fontSize: "22px", color: "#ffffffff", stroke: "#ffffffff", strokeThickness: 1 },
     result: { fontFamily: "Caudex", fontSize: "40px", color: "#000000" },
-    unlock: { fontFamily: "Caudex", fontSize: "26px", color: "#c5ECf7"}
+    unlock: { fontFamily: "Caudex", fontSize: "26px", color: "#c5ECf7" }
 }
 
 function textButton(
@@ -61,6 +61,8 @@ export default class Quiz extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image("back", "assets/ui/backbutton.png")
+
         this.load.image("cursor", "assets/ui/Banana.png")
         this.load.image("fish", "assets/fish/fish.png")
         this.load.json("quizQuestions", "src/data/quizQuestions.json")
@@ -69,6 +71,18 @@ export default class Quiz extends Phaser.Scene {
     }
 
     create(data: { level: string }) {
+        const backButton = this.add.image(50, 50, "back")
+            .setScale(0.05)
+            .setInteractive()
+            .setDepth(5)
+
+        backButton.on("pointerdown", () => {
+            this.scene.start("home")
+        })
+
+        backButton.on("pointerover", () => backButton.setScale(0.06))
+        backButton.on("pointerout", () => backButton.setScale(0.05))
+
         const Y = this.scale.height
         const centerX = this.scale.width / 2
 
@@ -78,7 +92,7 @@ export default class Quiz extends Phaser.Scene {
         this.score = 0
         this.optionContainers = []
         this.currentLevel = data.level
-        
+
         this.add.text(centerX, 60, `${this.currentLevel.charAt(0).toUpperCase() + this.currentLevel.slice(1)} Quiz`, STYLES.title).setOrigin(0.5)
 
         this.cursor = new Cursor(this, 300, 400, "cursor")
@@ -109,13 +123,13 @@ export default class Quiz extends Phaser.Scene {
 
         // Progress indicator
         this.questionText = this.add.text(
-            centerX, Y/3,
+            centerX, Y / 3,
             `Q${this.currentIndex + 1}/${questions.length}: \n ${q.question}`,
             STYLES.question
         ).setOrigin(0.5)
 
         q.options.forEach((opt, i) => {
-            const { container } = textButton(this, centerX, Y * 3/5 + i * 60, opt)
+            const { container } = textButton(this, centerX, Y * 3 / 5 + i * 60, opt)
             container.on("pointerdown", () => this.checkAnswer(opt, questions))
             this.optionContainers.push(container)
         })
@@ -133,9 +147,9 @@ export default class Quiz extends Phaser.Scene {
 
         if (selected === correct) {
             this.score++
-            this.feedbackText = this.add.text(centerX, Y * 9.25/10, "Correct!", { ...STYLES.feedback }).setOrigin(0.5)
+            this.feedbackText = this.add.text(centerX, Y * 9.25 / 10, "Correct!", { ...STYLES.feedback }).setOrigin(0.5)
         } else {
-            this.feedbackText = this.add.text(centerX, Y * 9.25/10, `Incorrect. Answer: ${correct}`, { ...STYLES.feedback }).setOrigin(0.5)
+            this.feedbackText = this.add.text(centerX, Y * 9.25 / 10, `Incorrect. Answer: ${correct}`, { ...STYLES.feedback }).setOrigin(0.5)
         }
 
         this.time.delayedCall(1000, () => {
@@ -161,17 +175,17 @@ export default class Quiz extends Phaser.Scene {
         if (this.feedbackText) this.feedbackText.destroy()
 
         this.add.text(centerX, Y / 6, "Quiz Complete!", STYLES.result).setOrigin(0.5)
-        this.add.text(centerX, Y* 1/2, `${this.score} / ${questions.length}`, STYLES.result).setOrigin(0.5)
+        this.add.text(centerX, Y * 1 / 2, `${this.score} / ${questions.length}`, STYLES.result).setOrigin(0.5)
 
         const levels = ["sunlight", "twilight", "midnight", "abyssal", "trenches"]
         const nextLevel = levels[levels.indexOf(this.currentLevel) + 1]
 
         if (nextLevel && this.score >= questions.length) {
             this.registry.set(`unlocked_${nextLevel}`, true)
-            this.registry.set(`completed_${this.currentLevel}`, true)  
+            this.registry.set(`completed_${this.currentLevel}`, true)
         }
 
-        const { container } = textButton(this, centerX, Y * 3/4, "Back to Home", 0x1a6fa8, 0x2589c7, {...STYLES.button, color: "#ffffff"})
+        const { container } = textButton(this, centerX, Y * 3 / 4, "Back to Home", 0x1a6fa8, 0x2589c7, { ...STYLES.button, color: "#ffffff" })
         container.on("pointerdown", () => this.scene.start("home"))
     }
 }
