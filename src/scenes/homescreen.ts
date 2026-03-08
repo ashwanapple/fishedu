@@ -13,6 +13,8 @@ export default class HomeScene extends Phaser.Scene {
     }
 
     create() {
+        
+
         // Read unlocked levels from registry (persists across scene restarts)
         const unlockedLevels: Record<string, boolean> = {
             sunlight: true,

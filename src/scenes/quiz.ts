@@ -18,6 +18,7 @@ export default class Quiz extends Phaser.Scene {
     optionButtons: Phaser.GameObjects.Text[] = []
     feedbackText!: Phaser.GameObjects.Text
 
+
     constructor() {
         super("quiz")
     }
@@ -26,9 +27,12 @@ export default class Quiz extends Phaser.Scene {
         this.load.image("cursor", "assets/ui/Banana.png")
         this.load.image("fish", "assets/fish/fish.png")
         this.load.json("quizQuestions", "src/data/quizQuestions.json")
+        this.load.image("background", "assets/ui/quizbackground.png")
     }
 
     create(data: { level: string }) {
+        this.add.image(0,0, "background").setOrigin(0, 0).setDisplaySize(this.scale.width, this.scale.height)
+
         this.currentIndex = 0
         this.score = 0
         this.optionButtons = []
