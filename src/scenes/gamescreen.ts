@@ -11,7 +11,7 @@ export default class GameScene extends Phaser.Scene {
     currentZone: string = ""
     currentSub: string = ""
     currentSea: string = ""
-    
+
 
     constructor() {
         super("game")
@@ -49,7 +49,7 @@ export default class GameScene extends Phaser.Scene {
             })
         })
 
-        
+
     }
 
     create() {
@@ -76,15 +76,15 @@ export default class GameScene extends Phaser.Scene {
 
         backButton.on("pointerover", () => backButton.setScale(0.07))
         backButton.on("pointerout", () => backButton.setScale(0.065))
-        
 
-        const catalogueButton = this.add.image(190,740,"diary")
+
+        const catalogueButton = this.add.image(190, 740, "diary")
             .setScale(0.52)
             .setInteractive()
             .setDepth(5)
 
         catalogueButton.on("pointerdown", () => {
-            this.scene.start("catalogue", {previousScene: "game", currentZone: this.currentZone})
+            this.scene.start("catalogue", { previousScene: "game", currentZone: this.currentZone })
         })
 
         catalogueButton.on("pointerover", () => catalogueButton.setScale(0.6))
@@ -97,26 +97,24 @@ export default class GameScene extends Phaser.Scene {
             loop: true
         })
 
-        // preload a small circle or star image first
-// this.load.image("particle", "assets/ui/particle.png")
 
-const particles = this.add.particles(0, 0, "bubble", {
-    speed: { min: 10, max: 50 },
-    angle: { min: 240, max: 300 },      // wider spread
-    scale: { min: 0.01, max: 0.025 },
-    alpha: { start: 0.8, end: 0 },
-    lifespan: { min: 800, max: 2000 },  // more varied lifespans
-    frequency: 150,
-    gravityY: -50,
-    accelerationX: { min: -20, max: 20 }, // random left/right drift
-    rotate: { min: 0, max: 360 },         // spin slightly
-    bounce: 0.2,                          // subtle wobble
-})
+        const particles = this.add.particles(0, 0, "bubble", {
+            speed: { min: 10, max: 50 },
+            angle: { min: 240, max: 300 },      // wider spread
+            scale: { min: 0.01, max: 0.025 },
+            alpha: { start: 0.8, end: 0 },
+            lifespan: { min: 800, max: 2000 },  // more varied lifespans
+            frequency: 150,
+            gravityY: -50,
+            accelerationX: { min: -20, max: 20 }, // random left/right drift
+            rotate: { min: 0, max: 360 },         // spin slightly
+            bounce: 0.2,                          // subtle wobble
+        })
 
-// follow the cursor every frame
-this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
-    particles.setPosition(pointer.x, pointer.y)
-})
+        // follow the cursor every frame
+        this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
+            particles.setPosition(pointer.x, pointer.y)
+        })
     }
 
     spawnFish() {
@@ -141,13 +139,13 @@ this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
         if (!fish.active) return
 
         const wasAdded = addFishToCatalogue({
-        id: fish.fishInfo.id,
-        name: fish.fishInfo.name,
-        speciesFact1: fish.fishInfo.speciesFact1,
-        zone: fish.fishInfo.zone,
-        fact2: fish.fishInfo.fact2,
-        fact3:fish.fishInfo.fact3,
-        image: fish.fishInfo.image
+            id: fish.fishInfo.id,
+            name: fish.fishInfo.name,
+            speciesFact1: fish.fishInfo.speciesFact1,
+            zone: fish.fishInfo.zone,
+            fact2: fish.fishInfo.fact2,
+            fact3: fish.fishInfo.fact3,
+            image: fish.fishInfo.image
         })
 
         if (wasAdded) {
@@ -167,28 +165,28 @@ this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
     }
 
     showNotification(message: string) {
-    const text = this.add.text(
-        this.cameras.main.width / 2,
-        50,
-        message,
-        {
-            fontSize: "24px",
-            color: "#ffffff",
-            backgroundColor: "#000000",
-            padding: { x: 12, y: 8 }
-        }
-    )
+        const text = this.add.text(
+            this.cameras.main.width / 2,
+            50,
+            message,
+            {
+                fontSize: "24px",
+                color: "#ffffff",
+                backgroundColor: "#000000",
+                padding: { x: 12, y: 8 }
+            }
+        )
 
-    text.setOrigin(0.5)
+        text.setOrigin(0.5)
 
-    this.tweens.add({
-        targets: text,
-        alpha: 0,
-        duration: 1200,
-        ease: "Linear",
-        onComplete: () => {
-            text.destroy()
-        }
-    })
-}
+        this.tweens.add({
+            targets: text,
+            alpha: 0,
+            duration: 1200,
+            ease: "Linear",
+            onComplete: () => {
+                text.destroy()
+            }
+        })
+    }
 }
