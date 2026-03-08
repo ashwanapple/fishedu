@@ -149,7 +149,7 @@ export default class Quiz extends Phaser.Scene {
             this.score++
             this.feedbackText = this.add.text(centerX, Y * 9.25 / 10, "Correct!", { ...STYLES.feedback }).setOrigin(0.5)
         } else {
-            this.feedbackText = this.add.text(centerX, Y * 9.25 / 10, `Incorrect. Answer: ${correct}`, { ...STYLES.feedback }).setOrigin(0.5)
+            this.feedbackText = this.add.text(centerX, Y * 9.25 / 10, "Incorrect", { ...STYLES.feedback }).setOrigin(0.5)
         }
 
         this.time.delayedCall(1000, () => {
