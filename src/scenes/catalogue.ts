@@ -32,9 +32,9 @@ export default class CatalogueScene extends Phaser.Scene {
 
     create(){
 
-        this.add.text(300,200,"Fish Catalogue")
+        this.add.text(300,50,"Fish Catalogue")
 
-        const backButton = this.add.text(360,400,"Back")
+        const backButton = this.add.text(360,500,"Back")
             .setInteractive()
 
         backButton.on("pointerdown", () => {
