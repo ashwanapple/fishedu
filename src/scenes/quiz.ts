@@ -168,7 +168,7 @@ export default class Quiz extends Phaser.Scene {
 
         if (nextLevel && this.score >= questions.length) {
             this.registry.set(`unlocked_${nextLevel}`, true)
-            this.add.text(centerX, Y* 7/8, `${nextLevel.charAt(0).toUpperCase() + nextLevel.slice(1)} unlocked!`, STYLES.unlock).setOrigin(0.5)
+            this.registry.set(`completed_${this.currentLevel}`, true)  
         }
 
         const { container } = textButton(this, centerX, Y * 3/4, "Back to Home", 0x1a6fa8, 0x2589c7, {...STYLES.button, color: "#ffffff"})

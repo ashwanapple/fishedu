@@ -10,10 +10,24 @@ export default class HomeScene extends Phaser.Scene {
 
     preload() {
         this.load.image("cursor", "assets/ui/Banana.png")
+        this.load.image("home", "assets/ui/home.png")
+        this.load.image("diary", "assets/ui/diarybook.png")
+
+        this.load.image("quizComplete", "assets/ui/quizComplete.png")
+        this.load.image("quizUnlocked", "assets/ui/quizUnlocked.png")
+        this.load.image("quizLocked", "assets/ui/quizLocked.png")
+
+        this.load.image("sunlightzone", "assets/ui/sunlightzone.png")
+        this.load.image("twilightzone", "assets/ui/twilightzone.png")
+        this.load.image("midnightzone", "assets/ui/midnightzone.png")
+        this.load.image("abysszone", "assets/ui/abysszone.png")
+        this.load.image("trencheszone", "assets/ui/trencheszone.png")
     }
 
     create() {
-        
+        const X = this.scale.width
+        const Y = this.scale.height
+        this.add.image(0, 0, "home").setOrigin(0, 0).setDisplaySize(X, Y)
 
         // Read unlocked levels from registry (persists across scene restarts)
         const unlockedLevels: Record<string, boolean> = {
@@ -24,50 +38,72 @@ export default class HomeScene extends Phaser.Scene {
             trenches: this.registry.get("unlocked_trenches") ?? false,
         }
 
-        this.add.text(330, 150, "Ocean Explorer")
-
         // Zone buttons
-        const zones = ["sunlight", "twilight", "midnight", "abyssal", "trenches"]
-        const zoneXPositions = [160, 260, 360, 460, 560]
+        const zones = [
+            { level: "sunlight", x: X * 4.45 / 24, y: Y * 5.5 / 15 },
+            { level: "twilight", x: X * 4.45 / 24, y: Y * 7.5 / 15 },
+            { level: "midnight", x: X * 4.45 / 24, y: Y * 9.5 / 15 },
+            { level: "abyss", x: X * 4.45 / 24, y: Y * 11.5 / 15 },
+            { level: "trenches", x: X * 4.45 / 24, y: Y * 13.5 / 15 },
+        ]
 
-        zones.forEach((zone, i) => {
-            const isUnlocked = unlockedLevels[zone] ?? false
-            this.add.text(zoneXPositions[i]!, 250, zone.charAt(0).toUpperCase() + zone.slice(1), {color: isUnlocked ? "#FFFFFF" : "#888888"})
-                .setInteractive({ useHandCursor: isUnlocked})
-                .on("pointerdown", () => {
-                    if (isUnlocked) this.scene.start("game", { current_zone: zone })
-                })
+        zones.forEach(({ level, x, y }) => {
+            const isUnlocked = unlockedLevels[level] ?? false
+
+            const btn = this.add.image(x, y, `${level}zone`)
+                .setScale(0.5)
+                .setInteractive({ useHandCursor: isUnlocked })
+                .setAlpha(isUnlocked ? 1 : 0.4)
+
+            btn.on("pointerdown", () => {
+                if (isUnlocked) this.scene.start("game", { current_zone: level })
+            })
+
+            btn.on("pointerover", () => { if (isUnlocked) btn.setScale(0.55) })
+            btn.on("pointerout", () => btn.setScale(0.5))
         })
 
         // Catalogue button
-        this.add.text(330, 300, "Catalogue")
+        const catalogueButton = this.add.image(X * 20 / 24, Y * 5 / 15, "diary")
+            .setScale(0.52)
             .setInteractive()
-            .on("pointerdown", () => {
-                this.scene.start("catalogue")
-            })
+            .setDepth(5)
+
+        catalogueButton.on("pointerdown", () => {
+            this.scene.start("catalogue")
+        })
+
+        catalogueButton.on("pointerover", () => catalogueButton.setScale(0.57))
+        catalogueButton.on("pointerout", () => catalogueButton.setScale(0.52))
 
         // Cursor
         this.cursor = new Cursor(this, 300, 475, "cursor")
 
         // Quiz buttons
         const quizLevels = [
-            { label: "Sunlight Quiz", level: "sunlight", y: 350 },
-            { label: "Twilight Quiz", level: "twilight", y: 375 },
-            { label: "Midnight Quiz", level: "midnight", y: 400 },
-            { label: "Abyssal Quiz", level: "abyssal", y: 425 },
-            { label: "Trenches Quiz", level: "trenches", y: 450 },
+            { label: "Sunlight Quiz", level: "sunlight", x: X * 8.5 / 24, y: Y * 5.5 / 15 },
+            { label: "Twilight Quiz", level: "twilight", x: X * 8.5 / 24, y: Y * 7.5 / 15 },
+            { label: "Midnight Quiz", level: "midnight", x: X * 8.5 / 24, y: Y * 9.5 / 15 },
+            { label: "Abyssal Quiz", level: "abyssal", x: X * 8.5 / 24, y: Y * 11.5 / 15 },
+            { label: "Trenches Quiz", level: "trenches", x: X * 8.5 / 24, y: Y * 13.5 / 15 },
         ]
 
-        quizLevels.forEach(({ label, level, y }) => {
+        quizLevels.forEach(({ label, level, x, y }) => {
             const isUnlocked = unlockedLevels[level] ?? false
-            const btn = this.add.text(330, y, label, {
-                fontSize: "20px",
-                color: isUnlocked ? "#ffffff" : "#888888"
-            }).setInteractive({ useHandCursor: isUnlocked })
+            const isCompleted = this.registry.get(`completed_${level}`) ?? false
+
+            const imageKey = isCompleted ? "quizComplete" : isUnlocked ? "quizUnlocked" : "quizLocked"
+
+            const btn = this.add.image(x, y, imageKey)
+                .setScale(0.5)
+                .setInteractive({ useHandCursor: isUnlocked })
 
             btn.on("pointerdown", () => {
                 if (isUnlocked) this.scene.start("quiz", { level })
             })
+
+            btn.on("pointerover", () => { if (isUnlocked) btn.setScale(0.55) })
+            btn.on("pointerout", () => btn.setScale(0.5))
         })
     }
 }
