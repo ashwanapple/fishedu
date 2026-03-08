@@ -63,35 +63,35 @@ export default class HomeScene extends Phaser.Scene {
         })
 
         // QUIZ BUTTONS
-        const quizSurface = this.add.text(330, 350, "Surface")
+        const quizSunlight = this.add.text(330, 350, "Sunlight Quiz")
             .setInteractive()
 
-        quizSurface.on("pointerdown", () => {
-            this.scene.start("quiz", {level: "surface"})
+        quizSunlight.on("pointerdown", () => {
+            this.scene.start("quiz", {level: "sunlight"})
         })
 
-        const quizTwilight = this.add.text(330, 375, "Twilight")
+        const quizTwilight = this.add.text(330, 375, "Twilight Quiz")
             .setInteractive()
 
         quizTwilight.on("pointerdown", () => {
             this.scene.start("quiz", {level: "twilight"})
         })
 
-        const quizMidnight = this.add.text(330, 400, "Midnight")
+        const quizMidnight = this.add.text(330, 400, "Midnight Quiz")
             .setInteractive()
 
         quizMidnight.on("pointerdown", () => {
             this.scene.start("quiz", {level: "midnight"})
         })
 
-        const quizAbyssal = this.add.text(330, 425, "Abyssal")
+        const quizAbyssal = this.add.text(330, 425, "Abyssal Quiz")
             .setInteractive()
 
         quizAbyssal.on("pointerdown", () => {
             this.scene.start("quiz", {level: "abyssal"})
         })
 
-        const quizTrenches = this.add.text(330, 450, "Trenches")
+        const quizTrenches = this.add.text(330, 450, "Trenches Quiz")
             .setInteractive()
 
         quizTrenches.on("pointerdown", () => {

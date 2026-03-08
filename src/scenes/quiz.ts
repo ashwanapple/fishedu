@@ -81,10 +81,6 @@ export default class Quiz extends Phaser.Scene {
         const correct = q.answer
         if (!q) return
 
-        // if(this.feedbackText) {
-        //     this.feedbackText.destroy()
-        // }
-
         if (selected == correct) {
             this.score++
             this.feedbackText = this.add.text(300, 420, "Correct!")
