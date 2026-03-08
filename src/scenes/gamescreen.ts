@@ -9,6 +9,8 @@ export default class GameScene extends Phaser.Scene {
     cursor!: Cursor
     fishes: Fish[] = []
     currentZone: string = ""
+    currentSub: string = ""
+    currentSea: string = ""
     
 
     constructor() {
@@ -18,30 +20,54 @@ export default class GameScene extends Phaser.Scene {
     init(data: { current_zone?: string }) {
         if (data.current_zone) {
             this.currentZone = data.current_zone.toLowerCase()
+            this.currentSub = data.current_zone.toLowerCase() + "sub"
+            this.currentSea = data.current_zone.toLowerCase() + "sea"
         }
     }
 
     preload() {
+        this.load.image("sunlightsea", "assets/ui/sunlightsea.png")
+        this.load.image("twilightsea", "assets/ui/twilightsea.png")
+        this.load.image("midnightsea", "assets/ui/midnightsea.png")
+        this.load.image("abyssalsea", "assets/ui/abyssalsea.png")
+        this.load.image("trenchessea", "assets/ui/trenchessea.png")
+
+        this.load.image("sunlightsub", "assets/ui/sunlightsub.png")
+        this.load.image("twilightsub", "assets/ui/twilightsub.png")
+        this.load.image("midnightsub", "assets/ui/midnightsub.png")
+        this.load.image("abyssalsub", "assets/ui/abyssalsub.png")
+        this.load.image("trenchessub", "assets/ui/trenchessub.png")
+
+        this.load.image("cursor", "assets/ui/Banana.png")
+
         Object.values(fishData).forEach((zoneArray) => {
             zoneArray.forEach((fish) => {
                 this.load.image(fish.id, fish.image)
             })
         })
 
-        this.load.image("cursor", "assets/ui/Banana.png")
+        
     }
 
     create() {
+        this.add.image(0, 0, this.currentSea)
+        .setOrigin(0, 0)
+        .setDisplaySize(this.scale.width, this.scale.height)
+
+        this.add.image(0, 0, this.currentSub)
+            .setOrigin(0, 0)
+            .setDisplaySize(this.scale.width, this.scale.height)
+
         this.cursor = new Cursor(this, 300, 400, "cursor")
 
-        const backButton = this.add.text(10, 10, "Back")
+        const backButton = this.add.text(60, 60, "Back")
             .setInteractive()
 
         backButton.on("pointerdown", () => {
             this.scene.start("home")
         })
 
-        const catalogueButton = this.add.text(700,10,"Catalogue")
+        const catalogueButton = this.add.text(160,670,"Catalogue")
             .setInteractive()
 
         catalogueButton.on("pointerdown", () => {
