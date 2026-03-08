@@ -51,17 +51,20 @@ export default class GameScene extends Phaser.Scene {
 
     create() {
         this.add.image(0, 0, this.currentSea)
-        .setOrigin(0, 0)
-        .setDisplaySize(this.scale.width, this.scale.height)
+            .setOrigin(0, 0)
+            .setDisplaySize(this.scale.width, this.scale.height)
+            .setDepth(0)
 
         this.add.image(0, 0, this.currentSub)
             .setOrigin(0, 0)
             .setDisplaySize(this.scale.width, this.scale.height)
+            .setDepth(3)
 
         this.cursor = new Cursor(this, 300, 400, "cursor")
 
         const backButton = this.add.text(60, 60, "Back")
             .setInteractive()
+            .setDepth(5)
 
         backButton.on("pointerdown", () => {
             this.scene.start("home")
@@ -69,6 +72,7 @@ export default class GameScene extends Phaser.Scene {
 
         const catalogueButton = this.add.text(160,670,"Catalogue")
             .setInteractive()
+            .setDepth(5)
 
         catalogueButton.on("pointerdown", () => {
             this.scene.start("catalogue", {previousScene: "game", currentZone: this.currentZone})
@@ -85,14 +89,13 @@ export default class GameScene extends Phaser.Scene {
     spawnFish() {
         const x = -50
         const y = Phaser.Math.Between(50, this.cameras.main.height - 50)
-
         const zoneCreatures = fishData[this.currentZone as keyof typeof fishData]
 
         if (!zoneCreatures || zoneCreatures.length === 0) return
 
         const randomFishData = Phaser.Utils.Array.GetRandom(zoneCreatures)
-
         const fish = new Fish(this, x, y, randomFishData)
+        fish.setDepth(1)
 
         fish.on("pointerdown", () => {
             this.catchFish(fish)
@@ -119,10 +122,6 @@ export default class GameScene extends Phaser.Scene {
         } else {
             this.showNotification(`${fish.fishInfo.name} found already`)
         }
-
-        
-
-       
     }
 
     update(time: number, delta: number) {
