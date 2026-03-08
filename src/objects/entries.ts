@@ -1,9 +1,10 @@
 export type CatalogueEntry = {
     id: string
     name: string
-    species: string
+    speciesFact1: string
     zone: string
-    description: string
+    fact2: string
+    fact3: string
     image: string
 }
 

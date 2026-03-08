@@ -2,6 +2,13 @@ import Phaser from "phaser"
 import Cursor from "../objects/cursor"
 import fishData from "../data/fishData.json"
 
+const STYLES = {
+    fishname: { fontFamily: "Caudex", fontSize: "30px", color: "#000000", stroke: "#000000", strokeThickness: 1, align: 'center'},
+    facts: { fontFamily: "Caudex", fontSize: "20px", color: "#000000", stroke: "#000000" },
+    zonefont: { fontFamily: "Caudex", fontSize: "25px", color: "#000000", stroke: "#000000", strokeThickness: 1 },
+}
+
+
 export default class CatalogueEntry extends Phaser.Scene {
     cursor!: Cursor
     fishId: string = ""
@@ -59,28 +66,17 @@ export default class CatalogueEntry extends Phaser.Scene {
             return
         }
 
-        this.add.text(410, 150, fish.name, {
-            fontSize: "30px",
-            color: "#ffffff"
-        }).setOrigin(0.5, 0)
+        this.add.text(410, 150, fish.name,STYLES.fishname).setOrigin(0.5, 0)
 
         this.add.image(435, 340, fish.id).setScale(0.05)
 
-        this.add.text(780, 185, `This is a ${fish.species}`, {
-            fontSize: "20px",
-            color: "#ffffff"
-        })
+        this.add.text(300, 210, `${fish.zone}`, STYLES.zonefont)
 
-        this.add.text(300, 210, `${fish.zone}`, {
-            fontSize: "20px",
-            color: "#ffffff"
-        })
+        this.add.text(780, 200, `This is a ${fish.speciesFact1}`, STYLES.facts)
 
-        this.add.text(780, 360, fish.description ?? "No description available.", {
-            fontSize: "18px",
-            color: "#cccccc",
-            wordWrap: { width: 400 }
-        })
+        this.add.text(780, 360, fish.fact2 ?? "No description available.", STYLES.facts)
+
+        this.add.text(780, 520, fish.fact3 ?? "No description available.", STYLES.facts)
 
         
     }

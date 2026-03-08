@@ -3,9 +3,10 @@ import Phaser from "phaser"
 export type FishInfo = {
     id: string
     name: string
-    species: string
+    speciesFact1: string
     zone: string
-    description: string
+    fact2: string
+    fact3: string
     image: string
     speedMin: number
     speedMax: number

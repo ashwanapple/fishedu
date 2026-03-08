@@ -114,9 +114,10 @@ export default class GameScene extends Phaser.Scene {
         const wasAdded = addFishToCatalogue({
         id: fish.fishInfo.id,
         name: fish.fishInfo.name,
-        species: fish.fishInfo.species,
+        speciesFact1: fish.fishInfo.speciesFact1,
         zone: fish.fishInfo.zone,
-        description: fish.fishInfo.description,
+        fact2: fish.fishInfo.fact2,
+        fact3:fish.fishInfo.fact3,
         image: fish.fishInfo.image
         })
 
