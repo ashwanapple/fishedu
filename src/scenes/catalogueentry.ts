@@ -4,8 +4,7 @@ import fishData from "../data/fishData.json"
 
 const STYLES = {
     fishname: { fontFamily: "PT Sans Narrow", fontSize: "35px", color: "#000000", stroke: "#000000", strokeThickness: 1, align: 'center' },
-    facts: { fontFamily: "PT Sans Narrow", fontSize: "20px", color: "#000000", stroke: "#000000" },
-    zonefont: { fontFamily: "PT Sans Narrow", fontSize: "25px", color: "#000000", stroke: "#000000", strokeThickness: 1 },
+    facts: { fontFamily: "PT Sans Narrow", fontSize: "25px", color: "#000000", stroke: "#000000" },
 }
 
 
@@ -75,8 +74,8 @@ export default class CatalogueEntry extends Phaser.Scene {
         this.add.text(410, 150, fish.name, STYLES.fishname).setOrigin(0.5, 0)
         this.add.image(435, 340, fish.id).setScale(0.05)
         this.add.image(350, 230, `${fish.zone}zone`).setScale(0.3)
-        this.add.text(780, 200, `This is a ${fish.speciesFact1}`, STYLES.facts)
-        this.add.text(780, 360, fish.fact2 ?? "No description available.", STYLES.facts)
-        this.add.text(780, 520, fish.fact3 ?? "No description available.", STYLES.facts)
+        this.add.text(780, 190, `This is a ${fish.speciesFact1}`, STYLES.facts)
+        this.add.text(780, 350, fish.fact2 ?? "No description available.", STYLES.facts)
+        this.add.text(780, 510, fish.fact3 ?? "No description available.", STYLES.facts)
     }
 }
