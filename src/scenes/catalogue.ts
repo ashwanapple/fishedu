@@ -25,6 +25,7 @@ export default class Catalogue extends Phaser.Scene {
 
     preload() {
         this.load.image("background", "assets/ui/diaryMain.png")
+        this.load.image("back", "assets/ui/backbutton.png")
         Object.values(fishData).forEach((zoneArray) => {
             zoneArray.forEach((fish) => {
                 this.load.image(fish.id, fish.image)
@@ -38,8 +39,10 @@ export default class Catalogue extends Phaser.Scene {
         const savedFish = getCatalogue()
         const allFish = Object.values(fishData).flat()
 
-        const backButton = this.add.text(10,10,"Back")
+        const backButton = this.add.image(50,50,"back")
+            .setScale(0.03)
             .setInteractive()
+            .setDepth(5)
 
         backButton.on("pointerdown", () => {
             if (this.previousScene === "game") {
