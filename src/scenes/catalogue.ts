@@ -40,7 +40,7 @@ export default class Catalogue extends Phaser.Scene {
         const allFish = Object.values(fishData).flat()
 
         const backButton = this.add.image(50,50,"back")
-            .setScale(0.03)
+            .setScale(0.055)
             .setInteractive()
             .setDepth(5)
 
@@ -53,6 +53,10 @@ export default class Catalogue extends Phaser.Scene {
                 this.scene.start("home")
             }
         })
+
+        backButton.on("pointerover", () => backButton.setScale(0.065))
+        backButton.on("pointerout", () => backButton.setScale(0.06))
+        
 
 
         const zoneBoxes = {

@@ -73,6 +73,10 @@ export default class GameScene extends Phaser.Scene {
             this.scene.start("home")
         })
 
+        backButton.on("pointerover", () => backButton.setScale(0.07))
+        backButton.on("pointerout", () => backButton.setScale(0.065))
+        
+
         const catalogueButton = this.add.image(190,740,"diary")
             .setScale(0.52)
             .setInteractive()
@@ -81,6 +85,9 @@ export default class GameScene extends Phaser.Scene {
         catalogueButton.on("pointerdown", () => {
             this.scene.start("catalogue", {previousScene: "game", currentZone: this.currentZone})
         })
+
+        catalogueButton.on("pointerover", () => catalogueButton.setScale(0.6))
+        catalogueButton.on("pointerout", () => catalogueButton.setScale(0.55))
 
         this.time.addEvent({
             delay: 3000,
