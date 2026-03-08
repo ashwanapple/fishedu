@@ -15,17 +15,19 @@ export default class Start extends Phaser.Scene {
     }
 
     create() {
-        
-        this.add.image(0,0, "startbg").setOrigin(0, 0).setDisplaySize(this.scale.width, this.scale.height).setDepth(0)
 
-        const backButton = this.add.image(700, 530, "playbutton")
-                    .setScale(0.1)
-                    .setInteractive()
-                    .setDepth(5)
-        
-                backButton.on("pointerdown", () => {
-                    this.scene.start("home")
-                })
+        this.add.image(0, 0, "startbg").setOrigin(0, 0).setDisplaySize(this.scale.width, this.scale.height).setDepth(0)
+
+        const playButton = this.add.image(700, 530, "playbutton")
+            .setScale(0.1)
+            .setInteractive()
+            .setDepth(5)
+
+        playButton.on("pointerdown", () => {
+            this.scene.start("home")
+        })
+        playButton.on("pointerover", () => playButton.setScale(0.11))
+        playButton.on("pointerout", () => playButton.setScale(0.1))
 
         this.cursor = new Cursor(this, 300, 475, "cursor")
     }

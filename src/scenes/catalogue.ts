@@ -54,6 +54,7 @@ export default class Catalogue extends Phaser.Scene {
             }
         })
 
+
         const zoneBoxes = {
             //x = 200 y= 295 -> x = 560 y = 155
             sunlight: { x: 210, y: 155, width: 350, height: 110 },
