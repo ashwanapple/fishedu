@@ -66,7 +66,7 @@ export default class CatalogueScene extends Phaser.Scene {
                 color: "#cccccc"
             })
 
-            this.add.text(140, y + 30, `${fish.description}`, {
+            this.add.text(140, y + 30, fish.description, {
                 fontSize: "16px",
                 color: "#cccccc"
             })
