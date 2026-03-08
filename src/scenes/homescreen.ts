@@ -29,10 +29,11 @@ export default class HomeScene extends Phaser.Scene {
         const zoneXPositions = [160, 260, 360, 460, 560]
 
         zones.forEach((zone, i) => {
-            this.add.text(zoneXPositions[i]!, 250, zone.charAt(0).toUpperCase() + zone.slice(1))
-                .setInteractive()
+            const isUnlocked = unlockedLevels[zone] ?? false
+            this.add.text(zoneXPositions[i]!, 250, zone.charAt(0).toUpperCase() + zone.slice(1), {color: isUnlocked ? "#FFFFFF" : "#888888"})
+                .setInteractive({ useHandCursor: isUnlocked})
                 .on("pointerdown", () => {
-                    this.scene.start("game", { current_zone: zone })
+                    if (isUnlocked) this.scene.start("game", { current_zone: zone })
                 })
         })
 
