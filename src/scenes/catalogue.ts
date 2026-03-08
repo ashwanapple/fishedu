@@ -4,12 +4,11 @@ import fishData from "../data/fishData.json"
 import { getCatalogue } from "../objects/entries"
 
 
-export default class CatalogueScene extends Phaser.Scene {
+export default class Catalogue extends Phaser.Scene {
     cursor!: Cursor
     previousScene: string = "home"
     currentZone?: string
     
-
     constructor(){
         super("catalogue")
     }
@@ -31,16 +30,15 @@ export default class CatalogueScene extends Phaser.Scene {
                 this.load.image(fish.id, fish.image)
             })
         })
-
     }
 
     create(){
-        this.add.image(0,0, "background").setOrigin(0, 0).setDisplaySize(this.scale.width, this.scale.height)
-        this.add.text(300,50,"Fish Catalogue")
+        this.add.image(0,0, "background").setOrigin(0, 0).setDisplaySize(this.scale.width, this.scale.height).setDepth(0)
     
         const savedFish = getCatalogue()
+        const allFish = Object.values(fishData).flat()
 
-        const backButton = this.add.text(360,500,"Back")
+        const backButton = this.add.text(10,10,"Back")
             .setInteractive()
 
         backButton.on("pointerdown", () => {
@@ -53,31 +51,59 @@ export default class CatalogueScene extends Phaser.Scene {
             }
         })
 
-        savedFish.forEach((fish, index) => {
-            const y = 100 + index * 100
+        const zoneBoxes = {
+            //x = 200 y= 295 -> x = 560 y = 155
+            sunlight: { x: 210, y: 155, width: 350, height: 110 },
+            twilight: { x: 200, y: 395, width: 350, height: 50 },
+            midnight: { x: 70, y: 260, width: 280, height: 110 },
+            abyssal: { x: 430, y: 260, width: 280, height: 110 },
+            trenches: { x: 250, y: 400, width: 280, height: 110 }
+        }
 
-            this.add.image(80, y, fish.id).setScale(0.04)
+        Object.entries(fishData).forEach(([zoneName, zoneFish]) => {
+            const box = zoneBoxes[zoneName as keyof typeof zoneBoxes]
+            if (!box) return
 
-            this.add.text(140, y - 20, fish.name, {
-                fontSize: "20px",
-                color: "#ffffff"
+            const cols = 3
+            const rows = Math.ceil(zoneFish.length / cols)
+            const cellW = box.width / cols
+            const cellH = box.height / rows
+
+            zoneFish.forEach((fish, fishIndex) => {
+                const col = fishIndex % cols
+                const row = Math.floor(fishIndex / cols)
+
+                const x = box.x + cellW / 2 + col * cellW
+                const y = box.y + cellH / 2 + row * cellH
+
+                const isUnlocked = savedFish.some((saved) => saved.id === fish.id)
+
+                const fishImage = this.add.image(x, y, fish.id)
+
+                const maxW = cellW * 0.7
+                const maxH = cellH * 0.7
+                const scaleX = maxW / fishImage.width
+                const scaleY = maxH / fishImage.height
+                const fitScale = Math.min(scaleX, scaleY)
+
+                fishImage.setScale(0.035)
+
+                if (isUnlocked) {
+                    fishImage.setInteractive()
+
+                    fishImage.on("pointerdown", () => {
+                        this.scene.start("entry", {
+                            fishId: fish.id,
+                            previousScene: "catalogue",
+                            current_zone: this.currentZone
+                        })
+                    })
+                } else {
+                    fishImage.setTint(0x000000)
+                    fishImage.setAlpha(0.95)
+                }
             })
-
-            this.add.text(140, y + 10, `Species: ${fish.species} | Zone: ${fish.zone}`, {
-                fontSize: "16px",
-                color: "#cccccc"
-            })
-
-            this.add.text(140, y + 30, fish.description, {
-                fontSize: "16px",
-                color: "#cccccc"
-            })
-
         })
-
         this.cursor = new Cursor(this ,300, 400, "cursor")
-        
-
     }
-
 }
