@@ -39,6 +39,8 @@ export default class GameScene extends Phaser.Scene {
         this.load.image("trenchessub", "assets/ui/trenchessub.png")
 
         this.load.image("cursor", "assets/ui/Banana.png")
+        this.load.image("diary", "assets/ui/diarybook.png")
+        this.load.image("back", "assets/ui/backbutton.png")
 
         Object.values(fishData).forEach((zoneArray) => {
             zoneArray.forEach((fish) => {
@@ -62,7 +64,8 @@ export default class GameScene extends Phaser.Scene {
 
         this.cursor = new Cursor(this, 300, 400, "cursor")
 
-        const backButton = this.add.text(60, 60, "Back")
+        const backButton = this.add.image(80, 60, "back")
+            .setScale(0.06)
             .setInteractive()
             .setDepth(5)
 
@@ -70,7 +73,8 @@ export default class GameScene extends Phaser.Scene {
             this.scene.start("home")
         })
 
-        const catalogueButton = this.add.text(160,670,"Catalogue")
+        const catalogueButton = this.add.image(190,740,"diary")
+            .setScale(0.52)
             .setInteractive()
             .setDepth(5)
 
