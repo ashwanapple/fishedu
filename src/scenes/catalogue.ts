@@ -4,6 +4,7 @@ import fishData from "../data/fishData.json"
 import { getCatalogue } from "../objects/entries"
 
 
+
 export default class Catalogue extends Phaser.Scene {
     cursor!: Cursor
     previousScene: string = "home"
